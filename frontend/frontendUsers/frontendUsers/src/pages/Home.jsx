@@ -140,7 +140,7 @@ export default function Home() {
             <div>
               <p className="title">Tomahawk</p>
               <p className="title">Tomahawk</p>
-              <p className="price">$23.00</p>
+              <p className="price">$23.030</p>
             </div>
           </div>
         </div>
