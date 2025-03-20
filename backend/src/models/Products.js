@@ -54,4 +54,4 @@ const productsSchema = new Schema (
 
 );
 
-export default model("Products", reviewSchema);
+export default model("Products", productsSchema);
