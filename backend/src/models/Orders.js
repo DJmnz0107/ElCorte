@@ -51,6 +51,8 @@ const orderSchema = new Schema(
       },
     },
     {
-      timestamps: true, // Campos createdAt y updatedAt
+      timestamps: true, 
     }
   );
+
+  export default model("Orders", orderSchema);
