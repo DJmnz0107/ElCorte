@@ -6,10 +6,9 @@ import employeesController from "../controllers/employeesController.js";
 
 router.route("/")
 .get(employeesController.getEmployees)
-.post(employeesController.createEmployees);
 
 router.route("/:id")
-.put(employeesController.updateEmployees)
-.delete(employeesController.deleteEmployees);
+.put(employeesController.updateEmployee)
+.delete(employeesController.deleteEmployee);
 
 export default router;
