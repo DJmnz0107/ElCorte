@@ -14,7 +14,7 @@ const suppliersSchema = new Schema (
             type:String,
             require:true
         },
-        addres: {
+        address: {
             type:String,
             require:true
         },

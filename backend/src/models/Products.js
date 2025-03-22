@@ -43,6 +43,11 @@ const productsSchema = new Schema (
             ref:"Categories",
             require:true
         },
+        suppliersID: {
+            type:Schema.Types.ObjectId,
+            ref:"Suppliers",
+            require:true
+        },
 
 
 

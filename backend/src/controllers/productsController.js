@@ -15,11 +15,18 @@ const productsController = {};
 import productsModel from "../models/Products.js";
 
 //SELECT
-
 productsController.getProducts = async (req, res) => {
-    const products = await productsModel.find();
-    res.json(products)
+    try {
+        const products = await productsModel.find()
+            .populate('categoriesID')  
+            .populate('suppliersID');  
+        
+        res.json(products);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 }
+
 
 //INSERT
 

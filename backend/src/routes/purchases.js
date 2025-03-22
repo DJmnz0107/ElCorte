@@ -3,10 +3,11 @@ const router = express.Router();
 import purchasesController from "../controllers/purchasesController.js";
 
 router.route("/")
-    .get(purchasesController.getPurchases);
+    .get(purchasesController.getPurchases)
+    .post(purchasesController.createPurchase);
 
 router.route("/:id")
-    .put(purchasesController.updateCategory)
-    .delete(purchasesController.deleteCategory);
+    .put(purchasesController.updatePurchase)
+    .delete(purchasesController.deletePurchase);
 
 export default router;

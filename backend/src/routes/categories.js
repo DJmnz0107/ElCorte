@@ -4,7 +4,8 @@ const router = express.Router();
 
 import categoryController from "../controllers/categoriesController.js"; 
 router.route("/")
-    .get(categoryController.getCategories);
+    .get(categoryController.getCategories)
+    .post(categoryController.createCategory);
 
 router.route("/:id")
     .put(categoryController.updateCategory)

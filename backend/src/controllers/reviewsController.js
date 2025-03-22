@@ -9,12 +9,19 @@ productID
 const reviewController = {};
 import reviewsModel from "../models/Reviews.js";
 
-//SELECT 
-
 reviewController.getReviews = async (req, res) => {
-    const reviews = await reviewsModel.find();
-    res.json(reviews)
+    try {
+        const reviews = await reviewsModel.find()
+            .populate('customersID')  // Populate para el cliente
+            .populate('productID');  // Populate para el producto
+        
+        res.json(reviews);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 }
+
+
 
 //INSERT 
 

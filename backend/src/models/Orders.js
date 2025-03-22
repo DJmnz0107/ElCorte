@@ -14,14 +14,14 @@ const orderSchema = new Schema(
     {
       customersID: {
         type: Schema.Types.ObjectId,
-        ref: "Customers", // Referencia a la colección de clientes
+        ref: "Customers", 
         required: [true, "El ID del cliente es obligatorio"],
       },
       products: [
         {
           productID: {
             type: Schema.Types.ObjectId,
-            ref: "Products", // Referencia a la colección de productos
+            ref: "Products", 
             required: true,
           },
           amount: {

@@ -45,4 +45,4 @@ categoryController.updateCategory = async (req, res) => {
     res.json({message: "Categoría actualizada"});
 }
 
-export default categoriesController;
+export default categoryController;

@@ -9,7 +9,7 @@ customerId
 */
 
 const paymentMethodController = {};
-import paymentMethodModel from "../models/PaymentMethod.js";
+import paymentMethodModel from "../models/PaymentMethods.js";
 
 // SELECT
 paymentMethodController.getPaymentMethods = async (req, res) => {

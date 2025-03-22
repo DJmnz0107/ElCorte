@@ -6,6 +6,7 @@ import employeesController from "../controllers/employeesController.js";
 
 router.route("/")
 .get(employeesController.getEmployees)
+.post(employeesController.createEmployee);
 
 router.route("/:id")
 .put(employeesController.updateEmployee)
