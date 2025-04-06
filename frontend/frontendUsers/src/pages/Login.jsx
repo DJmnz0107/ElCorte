@@ -1,9 +1,8 @@
-import LoginForm from '../components/loginForm';
 
 const LoginPage = () => {
   return (
     <div className="login-page">
-      <LoginForm />
+        <h1>Iniciar Sesión</h1>
     </div>
   );
 };
