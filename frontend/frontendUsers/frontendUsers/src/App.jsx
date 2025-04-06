@@ -1,15 +1,10 @@
-
-import './App.css'
+import './App.css';
+import SignIn from './pages/Login'; // Ruta correcta
 
 function App() {
-
-
   return (
-    <>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>    </>
-  )
+    <SignIn />
+  );
 }
 
-export default App
+export default App;
