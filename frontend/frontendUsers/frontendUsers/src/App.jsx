@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from './pages/Login';  // Asegúrate de que la ruta esté correcta
-import Signup from './pages/Signup';  // Asegúrate de que la ruta esté correcta
+import Signup from './pages/Signup';  // Asegúrate de que la ruta esté correcta 
 
 function App() {
   return (
