@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from 'react-router-dom';
 
-const Login = () => {
+const SignUp = () => {
   return (
     <div className="relative min-h-screen w-full flex overflow-hidden" style={{ fontFamily: "'Poppins', sans-serif" }}>
       {/* Sección del formulario - Más a la izquierda y más ancha */}
@@ -10,11 +9,38 @@ const Login = () => {
           
           {/* Título más grande y más a la izquierda */}
           <h1 className="text-4xl md:text-5xl font-bold mb-12 text-gray-900 text-left">
-            Iniciar sesión
+          Únete al goce 🍴 
           </h1>
 
           {/* Formulario con elementos más largos */}
           <div className="space-y-8">
+
+
+          <div className="text-left">
+              <label className="block text-base md:text-lg font-medium text-gray-700 mb-3">
+                Nombre
+              </label>
+              <input
+                type="email"
+                className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5C0A05] focus:border-transparent"
+                placeholder="Tu nombre"
+                style={{ minWidth: '100%' }}
+              />
+
+            </div>
+
+            <div className="text-left">
+              <label className="block text-base md:text-lg font-medium text-gray-700 mb-3">
+                Apellido
+              </label>
+              <input
+                type="email"
+                className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5C0A05] focus:border-transparent"
+                placeholder="Tu apellido"
+                style={{ minWidth: '100%' }}
+              />
+
+            </div>
             
             {/* Campo Email más ancho */}
             <div className="text-left">
@@ -27,6 +53,7 @@ const Login = () => {
                 placeholder="usuario@ejemplo.com"
                 style={{ minWidth: '100%' }}
               />
+
             </div>
 
             {/* Campo Contraseña más ancho */}
@@ -49,6 +76,23 @@ const Login = () => {
                 </button>
               </div>
             </div>
+
+            {/* Campo Fecha de Nacimiento */}
+            <div className="text-left">
+  <label className="block text-base md:text-lg font-medium text-gray-700 mb-3">
+    Fecha de Nacimiento
+  </label>
+  <div className="relative w-72"> {/* Ajuste del ancho aquí */}
+    <input
+      type="date"
+      className="w-full px-4 py-3 text-base border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5C0A05] focus:border-transparent text-gray-500"
+    />
+    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none">
+      {/* Aquí podés agregar un ícono si querés */}
+    </div>
+  </div>
+</div>
+
 
             {/* Botón Ingresar más grande */}
             <button className="w-full bg-[#5C0A05] hover:bg-[#400904] text-white py-4 rounded-xl font-semibold text-lg md:text-xl transition-colors shadow-lg mt-10">
@@ -78,12 +122,12 @@ const Login = () => {
             </button>
 
             {/* Texto para crear cuenta */}
-      <div className="mt-10 text-center text-gray-600 text-base md:text-lg">
-        ¿No tienes una cuenta?{" "}
-        <Link to="/registro" className="text-[#5C0A05] font-semibold hover:underline">
-          Crea una
-        </Link>
-      </div>
+<div className="mt-10 text-center text-gray-600 text-base md:text-lg">
+  ¿Ya tienes una cuenta?{" "}
+  <a href="/" className="text-[#5C0A05] font-semibold hover:underline">
+    Inicia sesión aquí	
+  </a>
+</div>
           </div>
         </div>
       </div>
@@ -102,4 +146,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
