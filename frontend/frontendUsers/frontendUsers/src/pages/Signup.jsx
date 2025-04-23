@@ -1,145 +1,103 @@
-import React from "react";
+import React from 'react';
+import '../css/register.css';
 
 const SignUp = () => {
   return (
-    <div className="relative min-h-screen w-full flex overflow-hidden" style={{ fontFamily: "'Poppins', sans-serif" }}>
-      {/* Sección del formulario - Más a la izquierda y más ancha */}
-      <div className="w-full md:w-[55%] flex flex-col justify-center pl-12 pr-8 md:pl-16 md:pr-12 bg-white">
-        <div className="max-w-lg w-full">
+    <div className="signup-container">
+      {/* Sección del formulario - Posicionada más arriba */}
+      <div className="signup-form-section">
+        <div className="signup-form-wrapper">
+          <h1 className="signup-title">Únete al goce <span className="emoji">🍴</span></h1>
           
-          {/* Título más grande y más a la izquierda */}
-          <h1 className="text-4xl md:text-5xl font-bold mb-12 text-gray-900 text-left">
-          Únete al goce 🍴 
-          </h1>
-
-          {/* Formulario con elementos más largos */}
-          <div className="space-y-8">
-
-
-          <div className="text-left">
-              <label className="block text-base md:text-lg font-medium text-gray-700 mb-3">
-                Nombre
-              </label>
-              <input
-                type="email"
-                className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5C0A05] focus:border-transparent"
-                placeholder="Tu nombre"
-                style={{ minWidth: '100%' }}
-              />
-
-            </div>
-
-            <div className="text-left">
-              <label className="block text-base md:text-lg font-medium text-gray-700 mb-3">
-                Apellido
-              </label>
-              <input
-                type="email"
-                className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5C0A05] focus:border-transparent"
-                placeholder="Tu apellido"
-                style={{ minWidth: '100%' }}
-              />
-
+          <form className="signup-form">
+            <div className="name-row">
+              <div className="form-group">
+                <label htmlFor="name">Nombre</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Tu nombre"
+                  className="form-input"
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="lastname">Apellido</label>
+                <input
+                  type="text"
+                  id="lastname"
+                  placeholder="Tu apellido"
+                  className="form-input"
+                />
+              </div>
             </div>
             
-            {/* Campo Email más ancho */}
-            <div className="text-left">
-              <label className="block text-base md:text-lg font-medium text-gray-700 mb-3">
-                Correo Electrónico
-              </label>
+            <div className="form-group">
+              <label htmlFor="email">Correo Electrónico</label>
               <input
                 type="email"
-                className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5C0A05] focus:border-transparent"
+                id="email"
                 placeholder="usuario@ejemplo.com"
-                style={{ minWidth: '100%' }}
+                className="form-input"
               />
-
             </div>
-
-            {/* Campo Contraseña más ancho */}
-            <div className="text-left">
-              <label className="block text-base md:text-lg font-medium text-gray-700 mb-3">
-                Contraseña
-              </label>
-              <div className="relative">
+            
+            <div className="form-group">
+              <label htmlFor="password">Contraseña</label>
+              <div className="password-input">
                 <input
                   type="password"
-                  className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl pr-14 focus:outline-none focus:ring-2 focus:ring-[#5C0A05] focus:border-transparent"
+                  id="password"
                   placeholder="••••••••"
-                  style={{ minWidth: '100%' }}
+                  className="form-input"
                 />
-                <button className="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                <button type="button" className="show-password">
+                  <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M12 5c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"/>
+                    <path d="M12 9c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"/>
                   </svg>
                 </button>
               </div>
             </div>
-
-            {/* Campo Fecha de Nacimiento */}
-            <div className="text-left">
-  <label className="block text-base md:text-lg font-medium text-gray-700 mb-3">
-    Fecha de Nacimiento
-  </label>
-  <div className="relative w-72"> {/* Ajuste del ancho aquí */}
-    <input
-      type="date"
-      className="w-full px-4 py-3 text-base border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5C0A05] focus:border-transparent text-gray-500"
-    />
-    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none">
-      {/* Aquí podés agregar un ícono si querés */}
-    </div>
-  </div>
-</div>
-
-
-            {/* Botón Ingresar más grande */}
-            <button className="w-full bg-[#5C0A05] hover:bg-[#400904] text-white py-4 rounded-xl font-semibold text-lg md:text-xl transition-colors shadow-lg mt-10">
-              Ingresar
-            </button>
-
-            {/* Divisor centrado */}
-            <div className="relative my-10">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t-2 border-gray-200"></div>
-              </div>
-              <div className="relative flex justify-center">
-                <span className="px-4 bg-white text-gray-500 text-lg">o</span>
-              </div>
+            
+            <div className="form-group date-group">
+              <label htmlFor="birthdate">Fecha de Nacimiento</label>
+              <input
+                type="date"
+                id="birthdate"
+                className="date-input"
+              />
             </div>
-
-            {/* Botón Google más grande */}
-            <button className="w-full flex items-center justify-center gap-4 border-2 border-gray-200 py-4 rounded-xl hover:bg-gray-50 transition-colors">
+            
+            <button type="submit" className="submit-button">
+              Registrarse
+            </button>
+            
+            <div className="divider">
+              <span>o</span>
+            </div>
+            
+            <button type="button" className="google-button">
               <img 
                 src="https://www.svgrepo.com/show/475656/google-color.svg" 
                 alt="Google" 
-                className="h-6 w-6"
+                className="google-icon"
               />
-              <span className="text-base md:text-lg font-medium text-gray-700">
-                Continuar con Google
-              </span>
+              Continuar con Google
             </button>
-
-            {/* Texto para crear cuenta */}
-<div className="mt-10 text-center text-gray-600 text-base md:text-lg">
-  ¿Ya tienes una cuenta?{" "}
-  <a href="/" className="text-[#5C0A05] font-semibold hover:underline">
-    Inicia sesión aquí	
-  </a>
-</div>
-          </div>
+            
+            {/* Texto de cuenta existente ajustado */}
+            <p className="existing-account">
+              ¿Tienes una cuenta? <a href="/login">Inicia sesión aquí</a>
+            </p>
+          </form>
         </div>
       </div>
-
-      {/* Sección del banner rojo con bordes redondeados */}
-      <div className="hidden md:block fixed right-0 top-0 bottom-0 w-[45%] bg-[#5C0A05] rounded-tl-3xl rounded-bl-3xl">
-        <div className="h-full flex items-center justify-center p-16">
-          <div className="text-center text-white">
-            <h2 className="text-5xl font-bold mb-8"></h2>
-            <p className="text-2xl opacity-90 leading-relaxed">
-            </p>
-          </div>
+      
+      {/* Banner lateral derecho */}
+      <div className="signup-banner">
+        <div className="banner-content">
+      
         </div>
       </div>
     </div>
