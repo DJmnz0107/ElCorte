@@ -3,22 +3,34 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import SignUp from './pages/Signup';
+import Store from './pages/Store';
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Ruta para login sin navbar */}
+        {/* Rutas SIN Navbar */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<SignUp />} />
         
-        {/* Otras rutas con navbar */}
+        {/* Rutas CON Navbar */}
+        <Route path="/" element={
+          <>
+            <Navbar />
+            <Store />
+          </>
+        } />
+        <Route path="/tienda" element={
+          <>
+            <Navbar />
+            <Store />
+          </>
+        } />
         <Route path="*" element={
           <>
             <Navbar />
-            {/* Aquí puedes agregar el contenido de otras páginas */}
             <div className="content">
-              <h1>Bienvenido a El Corté</h1>
+              <h1>404 - Página no encontrada</h1>
             </div>
           </>
         } />

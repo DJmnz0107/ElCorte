@@ -1,0 +1,31 @@
+/* PÁGINA PRINCIPAL */
+.store-page {
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  
+  /* CONTENEDOR INTERNO */
+  .store-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .products-container {
+    display: flex;
+    flex-wrap: wrap; /* permite que salten de línea */
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  
+  /* RESPONSIVE: Mantener el scroll horizontal siempre */
+  @media (max-width: 768px) {
+    .products-horizontal-scroll > * {
+      width: 250px; /* Ligero ajuste para móviles */
+    }
+  }
