@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PromoHeader from '../components/PromoHeader';
 import ProductCard from '../components/ProductCard';
 import CategoryFilter from '../components/CategoryFilter';
 
 const Store = () => {
   const [activeCategory, setActiveCategory] = useState('Todos');
+  const navigate = useNavigate();
   
   const categories = ['Todos', 'Carnes', 'Promociones', 'Accesorios', 'Paquetes'];
   
@@ -55,52 +57,39 @@ const Store = () => {
     }
   ];
 
+
   const filteredProducts = activeCategory === 'Todos' 
-  ? products 
-  : products.filter(product => product.category === activeCategory || 
-                            (activeCategory === 'Promociones' && product.promo));
+    ? products 
+    : products.filter(product => product.category === activeCategory || 
+                              (activeCategory === 'Promociones' && product.promo));
 
-                            return (
-                                <div className="store-page">
-                                  <PromoHeader />
-                                  
-                                  <div className="store-container">
-                                    <CategoryFilter 
-                                      categories={categories}
-                                      activeCategory={activeCategory}
-                                      onSelect={setActiveCategory}
-                                    />
-                                    
-                                    {/* CONTENEDOR CON SCROLL HORIZONTAL */}
-                                    <div className="products-container">
-                                      {filteredProducts.map(product => (
-                                        <div 
-                                          key={product.id}
-                                          className={`product-card ${product.promo ? 'promo' : ''}`}
-                                        >
-                                          {product.promo && <div className="promo-badge">PROMO</div>}
-                                          <img 
-                                            src={product.image} 
-                                            alt={product.title} 
-                                            className="product-image"
-                                          />
-                                          <div className="product-category">{product.category}</div>
-                                          <h3 className="product-title">{product.title}</h3>
-                                          <p className="product-description">{product.description}</p>
-                                          <div className="product-price">${product.price}</div>
-                                          <div className="product-rating">
-  {[...Array(5)].map((_, i) => (
-    <span key={i} className="star">★</span>
-  ))}
-</div>                                          <div className="sold-out">Almost sold out</div>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                </div>
-                              );
-                            };
+  const handleProductClick = (product) => {
+    navigate('/product-detail', { state: { product } });
+  };
 
-
+  return (
+    <div className="store-page">
+      <PromoHeader />
+      
+      <div className="store-container">
+        <CategoryFilter 
+          categories={categories}
+          activeCategory={activeCategory}
+          onSelect={setActiveCategory}
+        />
+        
+        <div className="products-container">
+          {filteredProducts.map(product => (
+            <ProductCard 
+              key={product.id}
+              product={product}
+              onClick={() => handleProductClick(product)}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Store;

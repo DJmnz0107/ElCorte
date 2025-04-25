@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import SignUp from './pages/Signup';
 import Store from './pages/Store';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -12,7 +13,6 @@ function App() {
         {/* Rutas SIN Navbar */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<SignUp />} />
-        
         {/* Rutas CON Navbar */}
         <Route path="/" element={
           <>
@@ -26,6 +26,12 @@ function App() {
             <Store />
           </>
         } />
+        <Route path="/product-detail" element = {
+          <>
+          <Navbar/>
+          <ProductDetail/>
+          </>
+        }/>
         <Route path="*" element={
           <>
             <Navbar />
