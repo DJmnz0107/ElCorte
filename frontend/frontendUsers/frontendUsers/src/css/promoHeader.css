@@ -1,0 +1,60 @@
+.promo-header-container {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background-color: #000;
+    color: white;
+    padding: 80px 40px; /* más espacio arriba y a los lados */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    gap: 40px;
+    box-sizing: border-box;
+    min-height: 320px; /* le das más altura al header */
+  }
+  
+  
+  
+  .promo-image-container {
+    max-width: 300px;
+    flex-shrink: 0;
+  }
+  
+  .fork-image {
+    max-height: 200px;
+    object-fit: contain;
+  }
+  
+  .promo-text-container {
+    max-width: 500px;
+  }
+  
+  .promo-label {
+    background-color: #7c0c0c;
+    color: white;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+  
+  .promo-main-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .promo-subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  
+  .promo-description {
+    font-size: 14px;
+    max-width: 420px;
+  }
+  
