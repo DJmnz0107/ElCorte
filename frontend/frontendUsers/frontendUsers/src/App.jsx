@@ -1,25 +1,24 @@
-import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
-import SignUp from './pages/Signup';
+import Signup from './pages/Signup';
+import Home from './pages/Home';
+import './App.css';
 
 function App() {
   return (
     <Router>
+      {/* Navbar visible en todas las páginas excepto Login/Signup */}
       <Routes>
-        {/* Ruta para login sin navbar */}
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<SignUp />} />
-        
-        {/* Otras rutas con navbar */}
+        <Route path="/signup" element={<Signup />} />
         <Route path="*" element={
           <>
             <Navbar />
-            {/* Aquí puedes agregar el contenido de otras páginas */}
-            <div className="content">
-              <h1>Bienvenido a El Corté</h1>
-            </div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="*" element={<div>404 Not Found</div>} />
+            </Routes>
           </>
         } />
       </Routes>
