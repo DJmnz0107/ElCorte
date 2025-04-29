@@ -110,7 +110,7 @@ const Navbar = () => {
           </div>
         </div>
         
-        <Link to="/sobre-nosotros" className="navbar-item">Sobre Nosotros</Link>
+        <Link to="/about-us" className="navbar-item">Sobre Nosotros</Link>
       </div>
 
       {/* Acciones del usuario */}
