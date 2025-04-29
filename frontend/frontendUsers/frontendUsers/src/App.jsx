@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import SignUp from './pages/Signup';
 import Store from './pages/Store';
 import ProductDetail from './pages/ProductDetail';
+import ConfirmPayment from './pages/ConfirmPayment';
 
 function App() {
   return (
@@ -30,6 +31,12 @@ function App() {
           <>
           <Navbar/>
           <ProductDetail/>
+          </>
+        }/>
+         <Route path="/confirm-payment" element = {
+          <>
+          <Navbar/>
+          <ConfirmPayment/>
           </>
         }/>
         <Route path="*" element={

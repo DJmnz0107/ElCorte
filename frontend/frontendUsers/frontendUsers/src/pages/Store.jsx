@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import PromoHeader from '../components/PromoHeader';
 import ProductCard from '../components/ProductCard';
@@ -87,6 +88,9 @@ const Store = () => {
             />
           ))}
         </div>
+      </div>
+      <div>
+      <Link to="/confirm-payment">Probar</Link>      
       </div>
     </div>
   );
