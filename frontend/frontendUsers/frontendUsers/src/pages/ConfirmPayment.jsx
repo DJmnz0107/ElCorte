@@ -1,8 +1,9 @@
+// ConfirmPayment.jsx
 import React, { useState } from 'react';
 import CreditCard from '../components/CreditCard';
 import OrderSummary from '../components/OrderSummary';
 import PaymentForm from '../components/PaymentForm';
-import '../css/confirmPayment.css'; // Archivo CSS para estilos
+import '../css/confirmPayment.css';
 
 const ConfirmPayment = () => {
   // Datos de ejemplo para la orden
@@ -10,7 +11,7 @@ const ConfirmPayment = () => {
     {
       name: 'Picaña',
       quantity: 4,
-      image: '/path-to-picana-image.jpg' // Reemplazar con la ruta real de la imagen
+      image: 'https://images.unsplash.com/photo-1544025162-d76694265947'
     }
   ];
   
@@ -73,9 +74,9 @@ const ConfirmPayment = () => {
         <div className="grid-layout">
           {/* Columna izquierda - Resumen de orden */}
           <div className="left-column">
-            <OrderSummary 
-              items={orderItems} 
-              total="40.00" 
+            <OrderSummary
+              items={orderItems}
+              total="40.00"
             />
           </div>
           
@@ -83,16 +84,16 @@ const ConfirmPayment = () => {
           <div className="right-column">
             {/* La tarjeta de crédito que muestra los datos actualizados */}
             <div className="credit-card-container">
-              <CreditCard 
+              <CreditCard
                 cardNumber={formData.cardNumber}
                 cardHolder={formData.cardHolder}
                 expiryDate={formData.expiryDate}
               />
             </div>
             
-            <PaymentForm 
-              formData={formData} 
-              handleChange={handleChange} 
+            <PaymentForm
+              formData={formData}
+              handleChange={handleChange}
             />
           </div>
         </div>
