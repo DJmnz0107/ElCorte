@@ -6,6 +6,8 @@ import SignUp from './pages/Signup';
 import Store from './pages/Store';
 import ProductDetail from './pages/ProductDetail';
 import AboutUs from './pages/AboutUs';
+import TermsAndConditions from './pages/TermsAndConditions';
+
 
 function App() {
   return (
@@ -38,6 +40,12 @@ function App() {
           <>
             <Navbar />
             <AboutUs />
+          </>
+        } />
+        <Route path="/TermsAndConditions" element={
+          <>
+            <Navbar/>
+            <TermsAndConditions/>
           </>
         } />
         

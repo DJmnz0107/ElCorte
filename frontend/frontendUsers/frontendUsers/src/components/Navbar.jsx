@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown, Search, ShoppingBag, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import elcorteLogo from './elcorte.png';
+import elcorteLogo from '../assets/elCorte.png';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -81,7 +81,7 @@ const Navbar = () => {
           </button>
           
           <div className={`dropdown-menu ${activeDropdown === 'tienda' ? 'show' : ''}`}>
-            <Link to="/terminos" className="dropdown-item">Términos y Condiciones</Link>
+            <Link to="/TermsAndConditions" className="dropdown-item">Términos y Condiciones</Link>
             <Link to="/garantias" className="dropdown-item">Política de Garantías</Link>
             <Link to="/envios" className="dropdown-item">Envíos y Devoluciones</Link>
           </div>
