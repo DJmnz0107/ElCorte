@@ -1,22 +1,40 @@
-// PaymentForm.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/paymentForm.css';
+import SuccessAlert from '../components/SucessAlert';
 
 const PaymentForm = ({ formData, handleChange }) => {
+  const [showAlert, setShowAlert] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simular una pequeña espera antes de mostrar la alerta
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setShowAlert(true);
+    }, 800);
+  };
+
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
   return (
     <div className="payment-form">
       <div className="payment-option">
         <button className="paypal-button">
-          <img 
-            src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png" 
-            alt="PayPal" 
-            className="paypal-icon" 
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png"
+            alt="PayPal"
+            className="paypal-icon"
           />
           <span>Pagar con PayPal</span>
         </button>
       </div>
       
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="email">E-mail</label>
           <input
@@ -86,10 +104,16 @@ const PaymentForm = ({ formData, handleChange }) => {
           />
         </div>
         
-        <button type="submit" className="submit-button">
-          Guardar método
+        <button 
+          type="submit" 
+          className="submit-button"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Procesando...' : 'Guardar método'}
         </button>
       </form>
+
+      <SuccessAlert show={showAlert} onClose={handleCloseAlert} />
     </div>
   );
 };
