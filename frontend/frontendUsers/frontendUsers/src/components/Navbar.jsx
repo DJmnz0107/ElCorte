@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDown, Search, ShoppingBag, Globe } from 'lucide-react';
+import { ChevronDown, Search, ShoppingBag, Globe, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import elcorteLogo from '../assets/elCorte.png';
 import './Navbar.css';
@@ -7,6 +7,7 @@ import './Navbar.css';
 const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const searchRef = useRef(null);
   const dropdownRefs = {
     tienda: useRef(null),
@@ -27,10 +28,19 @@ const Navbar = () => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+    
+    // Prevenir scroll cuando el menú móvil está abierto
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.body.style.overflow = 'auto';
     };
-  }, []);
+  }, [mobileMenuOpen]);
 
   const toggleDropdown = (dropdownName) => {
     setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
@@ -38,15 +48,25 @@ const Navbar = () => {
   };
 
   const handleMouseEnter = (dropdownName) => {
-    setActiveDropdown(dropdownName);
+    if (window.innerWidth > 768) {
+      setActiveDropdown(dropdownName);
+    }
   };
 
   const handleMouseLeave = () => {
-    setTimeout(() => {
-      if (!document.querySelector('.dropdown-container:hover')) {
-        setActiveDropdown(null);
-      }
-    }, 200);
+    if (window.innerWidth > 768) {
+      setTimeout(() => {
+        if (!document.querySelector('.dropdown-container:hover')) {
+          setActiveDropdown(null);
+        }
+      }, 200);
+    }
+  };
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+    setShowSearch(false);
+    setActiveDropdown(null);
   };
 
   return (
@@ -55,16 +75,36 @@ const Navbar = () => {
       <div className="navbar-logo-container">
         <Link to="/">
           <img 
-            src={elcorteLogo} 
+            src={elcorteLogo}
             alt="El Corté" 
             className="navbar-logo-image"
           />
         </Link>
       </div>
 
-      {/* Menú con dropdowns */}
-      <div className="navbar-menu">
-        <Link to="/" className="navbar-item">Inicio</Link>
+      {/* Hamburger Menu Icon for Mobile */}
+      <div className="mobile-menu-toggle">
+        <button 
+          className="menu-toggle-button"
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Menú con dropdowns - Versión desktop */}
+      <div className={`navbar-menu ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+        <div className="mobile-menu-header">
+          <button 
+            className="close-mobile-menu"
+            onClick={toggleMobileMenu}
+          >
+            <X size={24} />
+          </button>
+        </div>
+        
+        <Link to="/" className="navbar-item" onClick={() => setMobileMenuOpen(false)}>Inicio</Link>
         
         {/* Dropdown de Tienda */}
         <div 
@@ -81,13 +121,13 @@ const Navbar = () => {
           </button>
           
           <div className={`dropdown-menu ${activeDropdown === 'tienda' ? 'show' : ''}`}>
-          <Link to="/tienda " className="dropdown-item">Productos</Link>
-            <Link to="/TermsAndConditions" className="dropdown-item">Términos y Condiciones</Link>
-            <Link to="/envios" className="dropdown-item">Envíos y Devoluciones</Link>
+            <Link to="/tienda" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Productos</Link>
+            <Link to="/TermsAndConditions" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Términos y Condiciones</Link>
+            <Link to="/envios" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Envíos y Devoluciones</Link>
           </div>
         </div>
         
-        <Link to="/News" className="navbar-item">Noticias</Link>
+        <Link to="/News" className="navbar-item" onClick={() => setMobileMenuOpen(false)}>Noticias</Link>
         
         {/* Dropdown de Más */}
         <div 
@@ -104,16 +144,27 @@ const Navbar = () => {
           </button>
           
           <div className={`dropdown-menu ${activeDropdown === 'mas' ? 'show' : ''}`}>
-            <Link to="/contacto" className="dropdown-item">Contacto</Link>
-            <Link to="/preguntas" className="dropdown-item">Preguntas Frecuentes</Link>
-            <Link to="/blog" className="dropdown-item">Blog</Link>
+            <Link to="/contacto" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Contacto</Link>
+            <Link to="/preguntas" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Preguntas Frecuentes</Link>
+            <Link to="/blog" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
           </div>
         </div>
         
-        <Link to="/about-us" className="navbar-item">Sobre Nosotros</Link>
+        <Link to="/about-us" className="navbar-item" onClick={() => setMobileMenuOpen(false)}>Sobre Nosotros</Link>
+        
+        {/* Mobile-only user actions */}
+        <div className="mobile-menu-actions">
+          <Link to="/login" className="mobile-navbar-login" onClick={() => setMobileMenuOpen(false)}>
+            Iniciar Sesión
+          </Link>
+          <div className="mobile-search-container">
+            <input type="text" placeholder="Buscar..." className="mobile-search-input" />
+            <Search size={20} className="mobile-search-icon" />
+          </div>
+        </div>
       </div>
 
-      {/* Acciones del usuario */}
+      {/* Acciones del usuario - Versión desktop */}
       <div className="navbar-actions">
         <div className={`navbar-search ${showSearch ? 'expanded' : ''}`} ref={searchRef}>
           <button 
@@ -144,6 +195,9 @@ const Navbar = () => {
         
         <Globe size={20} className="navbar-globe" />
       </div>
+      
+      {/* Overlay para el menú móvil */}
+      {mobileMenuOpen && <div className="mobile-menu-overlay" onClick={toggleMobileMenu}></div>}
     </nav>
   );
 };
