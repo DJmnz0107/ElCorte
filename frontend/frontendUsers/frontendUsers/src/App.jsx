@@ -5,7 +5,13 @@ import Login from './pages/Login';
 import SignUp from './pages/Signup';
 import Store from './pages/Store';
 import ProductDetail from './pages/ProductDetail';
+<<<<<<< HEAD
 import ConfirmPayment from './pages/ConfirmPayment';
+=======
+import AboutUs from './pages/AboutUs';
+import TermsAndConditions from './pages/TermsAndConditions';
+
+>>>>>>> Marcos
 
 function App() {
   return (
@@ -14,6 +20,7 @@ function App() {
         {/* Rutas SIN Navbar */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<SignUp />} />
+        
         {/* Rutas CON Navbar */}
         <Route path="/" element={
           <>
@@ -27,11 +34,12 @@ function App() {
             <Store />
           </>
         } />
-        <Route path="/product-detail" element = {
+        <Route path="/product-detail" element={
           <>
-          <Navbar/>
-          <ProductDetail/>
+            <Navbar/>
+            <ProductDetail/>
           </>
+<<<<<<< HEAD
         }/>
          <Route path="/confirm-payment" element = {
           <>
@@ -39,6 +47,23 @@ function App() {
           <ConfirmPayment/>
           </>
         }/>
+=======
+        } />
+        <Route path="/about-us" element={
+          <>
+            <Navbar />
+            <AboutUs />
+          </>
+        } />
+        <Route path="/TermsAndConditions" element={
+          <>
+            <Navbar/>
+            <TermsAndConditions/>
+          </>
+        } />
+        
+        {/* Ruta 404 */}
+>>>>>>> Marcos
         <Route path="*" element={
           <>
             <Navbar />

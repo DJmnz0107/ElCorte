@@ -1,123 +1,253 @@
 /* Reset básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Variables de diseño */
-  :root {
-    --navbar-height: 80px;
-    --font-size-large: 1.1rem;
-    --color-primary: #333;
-    --color-hover: #000;
-    --color-accent: #a02020;
-  }
-  
-  /* Navbar principal */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-    height: var(--navbar-height);
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-  }
-  
-  /* Logo */
-  .navbar-logo img {
-    height: 60px;
-    width: auto;
-    object-fit: contain;
-  }
-  
-  /* Menú */
-  .navbar-menu {
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .navbar-item {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-size: var(--font-size-large);
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
-  
-  .navbar-item:hover {
-    color: var(--color-hover);
-  }
-  
-  /* Barra de búsqueda */
-  .navbar-search {
-    display: flex;
-    align-items: center;
-    margin-right: 1rem;
-  }
-  
-  .search-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-  }
-  
-  .search-input {
-    border: none;
-    background: transparent;
-    outline: none;
-    margin-left: 0.5rem;
-    width: 150px;
-  }
-  
-  /* Acciones */
-  .navbar-actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .navbar-login {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-size: var(--font-size-large);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-  }
-  
-  .navbar-login:hover {
-    background-color: #f5f5f5;
-  }
-  
-  .navbar-cart {
-    position: relative;
-  }
-  
-  .cart-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: var(--color-accent);
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: bold;
-  }
-  
-  /* Espacio para el contenido debajo del navbar */
-  body {
-    padding-top: var(--navbar-height);
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables de diseño */
+:root {
+  --navbar-height: 70px;
+  --font-size-large: 1.1rem;
+  --transition-duration: 0.25s;
+  --color-primary: #333;
+  --color-hover: #000;
+  --color-accent: #a02020;
+  --dropdown-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar principal */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: var(--navbar-height);
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Contenedor del logo */
+.navbar-logo-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+/* Imagen del logo con tamaño controlado */
+.navbar-logo-image {
+  max-height: 50px; /* Ajusta este valor según necesites */
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.navbar-logo-image:hover {
+  transform: scale(1.05);
+}
+
+/* Menú principal */
+.navbar-menu {
+  display: flex;
+  gap: 1.8rem;
+  align-items: center;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.navbar-item {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: var(--font-size-large);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  height: 100%;
+  position: relative;
+  transition: all var(--transition-duration) var(--transition-timing);
+  white-space: nowrap;
+}
+
+.navbar-item:hover {
+  color: var(--color-hover);
+  font-weight: 600;
+}
+
+/* Estilos de dropdown */
+.dropdown-container {
+  position: relative;
+  height: 100%;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-icon {
+  transition: transform 0.2s ease-out;
+  margin-left: 5px;
+}
+
+.dropdown-icon.rotate {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.25s ease-out;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px 16px;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f8f8;
+  color: #000;
+  padding-left: 20px;
+}
+
+/* Barra de búsqueda */
+.navbar-search {
+  display: flex;
+  align-items: center;
+  transition: all var(--transition-duration) var(--transition-timing);
+  margin-right: 15px;
+}
+
+.navbar-search.expanded {
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  padding-right: 15px;
+}
+
+.search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.search-button:hover {
+  transform: scale(1.1);
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  margin-left: 8px;
+  width: 0;
+  opacity: 0;
+  transition: all var(--transition-duration) var(--transition-timing);
+}
+
+.navbar-search.expanded .search-input {
+  width: 180px;
+  opacity: 1;
+}
+
+/* Acciones del usuario */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.navbar-login {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: var(--font-size-large);
+  font-weight: 500;
+  transition: all var(--transition-duration) var(--transition-timing);
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.navbar-login:hover {
+  color: var(--color-hover);
+  background-color: #f5f5f5;
+}
+
+.navbar-cart {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.navbar-cart:hover {
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--color-accent);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.navbar-globe {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.navbar-globe:hover {
+  transform: scale(1.1);
+}
+
+/* Espacio para el contenido debajo del navbar */
+body {
+  padding-top: var(--navbar-height);
+}
