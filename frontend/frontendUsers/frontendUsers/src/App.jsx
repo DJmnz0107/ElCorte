@@ -5,13 +5,10 @@ import Login from './pages/Login';
 import SignUp from './pages/Signup';
 import Store from './pages/Store';
 import ProductDetail from './pages/ProductDetail';
-<<<<<<< HEAD
 import ConfirmPayment from './pages/ConfirmPayment';
-=======
 import AboutUs from './pages/AboutUs';
 import TermsAndConditions from './pages/TermsAndConditions';
 
->>>>>>> Marcos
 
 function App() {
   return (
@@ -39,7 +36,6 @@ function App() {
             <Navbar/>
             <ProductDetail/>
           </>
-<<<<<<< HEAD
         }/>
          <Route path="/confirm-payment" element = {
           <>
@@ -47,8 +43,6 @@ function App() {
           <ConfirmPayment/>
           </>
         }/>
-=======
-        } />
         <Route path="/about-us" element={
           <>
             <Navbar />
@@ -61,9 +55,6 @@ function App() {
             <TermsAndConditions/>
           </>
         } />
-        
-        {/* Ruta 404 */}
->>>>>>> Marcos
         <Route path="*" element={
           <>
             <Navbar />
