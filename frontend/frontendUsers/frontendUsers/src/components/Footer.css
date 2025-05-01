@@ -1,0 +1,181 @@
+/* Footer principal */
+.footer {
+  background-color: #fff;
+  color: #333;
+  padding: 3rem 0 1.5rem;
+  width: 100vw; /* Usar viewport width para asegurar ancho completo */
+  margin-left: calc(-50vw + 50%); /* Técnica para extender a ancho completo */
+  margin-right: calc(-50vw + 50%);
+  margin-top: auto; /* Para mantener el footer al final */
+  position: relative; /* Para asegurar que sea visible */
+  z-index: 10; /* Asegurar que está por encima de otros elementos */
+  border-top: 1px solid #eee;
+  box-sizing: border-box; /* Asegurar que padding no aumente el ancho */
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Columnas del footer */
+.footer-col {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+/* Logo */
+.footer-logo-container {
+  margin-bottom: 1rem;
+}
+
+.footer-logo-img {
+  max-height: 40px;
+  width: auto;
+  display: block;
+}
+
+.footer-quote {
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: #666;
+}
+
+/* Títulos de columnas */
+.footer-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  color: #333;
+  position: relative;
+}
+
+/* Listas y links */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-link {
+  color: #555;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.footer-text {
+  color: #555;
+}
+
+.footer-link:hover {
+  color: #901a1a;
+}
+
+/* Parte inferior del footer */
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 0;
+  border-top: 1px solid #eee;
+}
+
+.footer-copyright {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon-link {
+  color: #fff;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.social-icon-link:hover {
+  transform: translateY(-3px);
+}
+
+.social-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #901a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.social-icon-circle:hover {
+  background-color: #701010;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+  }
+  
+  .footer-col {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  
+  .footer-title {
+    cursor: pointer;
+  }
+  
+  .footer-title::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    font-size: 1.2rem;
+  }
+  
+  .footer-links {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .footer-links.show-mobile {
+    max-height: 200px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-social {
+    margin-top: 1rem;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,72 @@
+.news-page {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .news-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .news-section {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .section-title {
+    color: #901a1a;
+    font-size: 20px;
+    margin: 0;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .carnivora-section {
+    grid-column: span 1;
+  }
+  
+  .top-section {
+    grid-column: span 1;
+  }
+  
+  .education-section {
+    grid-column: span 1;
+  }
+  
+  /* Media queries para responsive */
+  @media (max-width: 1024px) {
+    .news-container {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .carnivora-section {
+      grid-column: span 1;
+    }
+    
+    .top-section {
+      grid-column: span 1;
+    }
+    
+    .education-section {
+      grid-column: span 2;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .news-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .carnivora-section,
+    .top-section,
+    .education-section {
+      grid-column: span 1;
+    }
+  }

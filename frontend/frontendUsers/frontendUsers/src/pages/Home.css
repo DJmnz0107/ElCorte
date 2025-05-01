@@ -1,0 +1,797 @@
+
+/* ===== RESET PARA MÁRGENES LATERALES ===== */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Evita desbordamiento horizontal */
+}
+
+.main-container {
+  width: 100%;
+  max-width: 100vw; /* Forza el ancho completo */
+  overflow-x: hidden; /* Asegura que no hay scroll horizontal */
+}
+
+/* Elimina márgenes laterales en las secciones principales */
+.home-container,
+.categories-section,
+.special-meats-section,
+.our-history-section,
+.reviews-section {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+/* Contenedor interno (opcional, para mantener el diseño actual) */
+.text-content,
+.image-container,
+.categories-container,
+.special-meats-container,
+.our-history-content,
+.reviews-content {
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 1400px; /* Ajusta según tu diseño */
+  margin: 0 auto; /* Centra el contenido */
+}
+
+
+.main-container {
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 60px;
+  background-color: white;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.text-content {
+  max-width: 520px;
+  margin-top: 20px;
+}
+
+.text-content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: black;
+  line-height: 1.3;
+}
+
+.text-content h1 span {
+  color: #4A0C0C;
+}
+
+.text-content p {
+  color: #4a4a4a;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.order-button {
+  background-color: #4A0C0C;
+  color: white;
+  padding: 14px 30px;
+  border-radius: 50px;
+  border: none;
+  font-size: 1rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.order-button:hover {
+  background-color: #3b0909;
+}
+
+.image-container {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-background {
+  width: 100%;
+  height: 100%;
+  background-color: #4A0C0C;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.main-image {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 400px;
+  object-fit: cover;
+}
+
+.badge {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  color: #B30000;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 3;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.badge img {
+  width: 24px;
+  height: auto;
+}
+
+.product-card {
+  position: absolute;
+  bottom: -40px;
+  background-color: white;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 190px;
+  z-index: 3;
+}
+
+.product-card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.product-card .title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.product-card .price {
+  color: #4A0C0C;
+  font-size: 0.9rem;
+}
+
+.product-card.left {
+  left: -80px;
+}
+
+.product-card.right {
+  right: -80px;
+}
+
+/* Nueva sección de Categorías */
+.categories-section {
+  padding: 80px 60px;
+  background-color: white;
+}
+
+.section-subtitle {
+  color: #FF6B6B;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 40px;
+}
+
+.categories-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  overflow-x: visible;
+}
+
+.category-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: center;
+  flex: 1;
+  min-width: 220px;
+  transition: transform 0.3s;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+}
+
+.category-icon-container {
+  width: 80px;
+  height: 80px;
+  background-color: #F8D7DA;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.category-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.category-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.category-card p {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* Sección de Carnes Especiales */
+.special-meats-section {
+  padding: 60px 60px 80px;
+  background-color: #F9F9F9;
+}
+
+.special-meats-container {
+  display: flex;
+  gap: 24px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  overflow-x: visible;
+}
+
+.meat-card {
+  background-color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  width: 300px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.meat-card:hover {
+  transform: translateY(-6px);
+}
+
+.meat-image-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.meat-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.add-to-cart-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #4A0C0C;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.add-to-cart-btn:before {
+  content: "+";
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #3b0909;
+}
+
+.meat-details {
+  padding: 20px;
+}
+
+.meat-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.meat-description {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.meat-price-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.meat-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #4A0C0C;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star {
+  color: #FFD700;
+  font-size: 1.1rem;
+}
+
+.rating-value {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.see-all-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.see-all-button {
+  background-color: transparent;
+  border: none;
+  color: #4A0C0C;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #4A0C0C;
+  transition: all 0.3s;
+}
+
+.see-all-button:hover {
+  opacity: 0.8;
+}
+
+/* Sección de Nuestra Historia */
+.our-history-section {
+  padding: 80px 60px;
+  background-color: #F9F9F9;
+}
+
+.our-history-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.our-history-text {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.history-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.know-more-button {
+  background-color: #4A0C0C;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.know-more-button:hover {
+  background-color: #3b0909;
+}
+
+.team-cards-container {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.team-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+}
+
+.team-card-ceo {
+  margin-top: 30px;
+  margin-right: 40px;
+}
+
+.team-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.team-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.team-role {
+  color: #4A0C0C;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.team-name {
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.team-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.team-button {
+  background-color: #4A0C0C;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 100%;
+  justify-content: center;
+}
+
+.team-button:hover {
+  background-color: #3b0909;
+}
+
+.team-button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-button-icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Responsive para la sección de Nuestra Historia */
+@media (max-width: 1024px) {
+  .our-history-section {
+    padding: 60px 40px;
+  }
+  
+  .team-card {
+    width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .our-history-section {
+    padding: 50px 30px;
+  }
+  
+  .our-history-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .our-history-text {
+    max-width: 100%;
+    text-align: center;
+  }
+  
+  .team-cards-container {
+    justify-content: center;
+  }
+  
+  .team-card-ceo {
+    margin-top: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .our-history-section {
+    padding: 40px 20px;
+  }
+  
+  .team-cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .team-card {
+    width: 100%;
+    max-width: 240px;
+  }
+}
+
+/* Sección de Reseñas */
+.reviews-section {
+  padding: 80px 60px;
+  background-color: white;
+}
+
+.reviews-content {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.reviews-image-container {
+  flex: 1;
+  min-width: 300px;
+}
+
+.reviews-image {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  border-radius: 16px;
+}
+
+.reviews-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.testimonial {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.reviews-rating {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.reviews-avatars {
+  display: flex;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid white;
+  margin-right: -10px;
+}
+
+.rating-container h4 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.total-reviews {
+  color: #777;
+  font-size: 0.85rem;
+  margin-left: 4px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .home-container {
+    padding: 60px 40px;
+  }
+  
+  .image-container {
+    width: 400px;
+    height: 400px;
+  }
+  
+  .main-image {
+    max-width: 360px;
+  }
+  
+  .text-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .categories-section,
+  .special-meats-section,
+  .reviews-section {
+    padding: 60px 40px;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 40px 30px;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .text-content {
+    max-width: 100%;
+    margin-bottom: 60px;
+  }
+  
+  .image-container {
+    width: 360px;
+    height: 360px;
+  }
+  
+  .main-image {
+    max-width: 320px;
+  }
+  
+  .product-card.left {
+    left: -20px;
+  }
+  
+  .product-card.right {
+    right: -20px;
+  }
+  
+  .categories-section,
+  .special-meats-section,
+  .reviews-section {
+    padding: 50px 30px;
+  }
+  
+  .category-card {
+    min-width: 180px;
+  }
+  
+  .special-meats-container {
+    justify-content: center;
+  }
+  
+  .meat-card {
+    width: 280px;
+  }
+  
+  .reviews-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .reviews-image {
+    margin-bottom: 30px;
+  }
+  
+  .reviews-rating {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 30px 20px;
+  }
+  
+  .text-content h1 {
+    font-size: 2rem;
+  }
+  
+  .image-container {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .main-image {
+    max-width: 260px;
+  }
+  
+  .product-card {
+    width: 150px;
+  }
+  
+  .categories-section,
+  .special-meats-section,
+  .reviews-section {
+    padding: 40px 20px;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .category-card {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .meat-card {
+    width: 100%;
+  }
+}

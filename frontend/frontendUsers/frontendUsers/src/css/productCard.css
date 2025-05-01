@@ -1,95 +1,145 @@
-/* CONTENEDOR PRINCIPAL DE PRODUCTOS */
+/* CONTENEDOR PRINCIPAL DE LA PÁGINA */
+.store-page {
+  padding: 20px;
+  background-color: #ffffff;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* CONTENEDOR INTERNO CENTRAL */
+.store-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* CONTENEDOR DE PRODUCTOS */
 .products-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px;
-    padding: 40px;
-    background-color: #ffffff; /* Fondo blanco */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding: 40px;
+  background-color: #ffffff;
+}
+
+/* TARJETA DE PRODUCTO */
+.product-card-container {
+  width: 260px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+  position: relative;
+}
+
+/* HOVER */
+.product-card-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* PROMO */
+.promo {
+  border: 2px solid #f00;
+}
+
+.promo-badge {
+  background-color: red;
+  color: white;
+  padding: 4px 8px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 12px;
+  z-index: 1;
+}
+
+/* IMAGEN */
+.product-image {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 16px;
+  background-color: #f8f8f8;
+}
+
+/* CATEGORÍA */
+.product-category {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+/* TÍTULO */
+.product-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+  color: #333;
+}
+
+/* DESCRIPCIÓN */
+.product-description {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+/* PRECIO */
+.product-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* RATING */
+.product-rating {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.star {
+  font-size: 16px;
+  color: #ccc;
+}
+
+.star.filled {
+  color: #FFD700;
+}
+
+/* AGOTADO */
+.sold-out {
+  font-size: 0.75rem;
+  color: #d32f2f;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+  .products-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 20px;
+    gap: 16px;
+    justify-content: flex-start;
   }
-  
-  /* TARJETA INDIVIDUAL */
-  .product-card {
-    width: 260px;
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-    overflow: hidden;
-    transition: transform 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    border: 1px solid #f0f0f0; /* Borde sutil */
+
+  .product-card-container {
+    flex: 0 0 230px;
   }
-  
-  /* ESTILOS PARA LAS ESTRELLAS */
-  .product-rating {
-    display: flex;
-    gap: 2px;
-    margin-bottom: 8px;
-  }
-  
-  .product-rating .star {
-    color: #FFD700; /* Amarillo dorado */
-    font-size: 1rem;
-  }
-  
-  /* IMAGEN DEL PRODUCTO */
-  .product-image {
-    width: 100%;
-    border-radius: 12px;
-    object-fit: cover;
-    aspect-ratio: 1 / 1;
-    margin-bottom: 16px;
-    background-color: #f8f8f8; /* Fondo gris claro para la imagen */
-  }
-  
-  /* Resto de estilos se mantienen igual */
-  .product-title {
-    font-weight: 600;
-    font-size: 1.05rem;
-    margin: 0;
-    color: #333;
-  }
-  
-  .product-brand {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 6px;
-  }
-  
-  .product-description {
-    font-size: 0.85rem;
-    color: #555;
-    margin-bottom: 10px;
-    line-height: 1.3;
-  }
-  
-  .product-price {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 4px;
-  }
-  
-  .product-status {
-    font-size: 0.75rem;
-    color: #d32f2f;
-    font-weight: 600;
-    text-align: right;
-  }
-  
-  /* SCROLL RESPONSIVO */
-  @media (max-width: 768px) {
-    .products-container {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      padding: 20px;
-      gap: 16px;
-      justify-content: flex-start; /* Alinear a la izquierda en móviles */
-    }
-  
-    .product-card {
-      flex: 0 0 230px;
-    }
-  }
+}
