@@ -1,3 +1,45 @@
+
+/* ===== RESET PARA MÁRGENES LATERALES ===== */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Evita desbordamiento horizontal */
+}
+
+.main-container {
+  width: 100%;
+  max-width: 100vw; /* Forza el ancho completo */
+  overflow-x: hidden; /* Asegura que no hay scroll horizontal */
+}
+
+/* Elimina márgenes laterales en las secciones principales */
+.home-container,
+.categories-section,
+.special-meats-section,
+.our-history-section,
+.reviews-section {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+/* Contenedor interno (opcional, para mantener el diseño actual) */
+.text-content,
+.image-container,
+.categories-container,
+.special-meats-container,
+.our-history-content,
+.reviews-content {
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 1400px; /* Ajusta según tu diseño */
+  margin: 0 auto; /* Centra el contenido */
+}
+
+
 .main-container {
   width: 100%;
   height: 100vh;
