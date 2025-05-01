@@ -10,6 +10,7 @@ import AboutUs from './pages/AboutUs';
 import TermsAndConditions from './pages/TermsAndConditions';
 import Home from './pages/Home';
 import News from './pages/NewsPage';
+import ContactUs from './pages/ContactUs';
 import './App.css';
 
 function App() {
@@ -67,6 +68,13 @@ function App() {
           <>
             <Navbar/>
             <News/>
+            <Footer />
+          </>
+        } />
+        <Route path="/ContactUs" element={
+          <>
+            <Navbar/>
+            <ContactUs/>
             <Footer />
           </>
         } />

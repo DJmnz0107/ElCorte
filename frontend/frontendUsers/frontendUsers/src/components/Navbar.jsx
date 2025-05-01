@@ -104,7 +104,7 @@ const Navbar = () => {
           </button>
           
           <div className={`dropdown-menu ${activeDropdown === 'mas' ? 'show' : ''}`}>
-            <Link to="/contacto" className="dropdown-item">Contacto</Link>
+            <Link to="/ContactUs" className="dropdown-item">Contacto</Link>
             <Link to="/preguntas" className="dropdown-item">Preguntas Frecuentes</Link>
             <Link to="/blog" className="dropdown-item">Blog</Link>
           </div>
