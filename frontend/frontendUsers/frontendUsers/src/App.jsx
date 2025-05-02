@@ -11,6 +11,7 @@ import TermsAndConditions from './pages/TermsAndConditions';
 import Home from './pages/Home';
 import News from './pages/NewsPage';
 import ContactUs from './pages/ContactUs';
+import Cart from './pages/Cart';
 import './App.css';
 
 function App() {
@@ -40,6 +41,13 @@ function App() {
           <>
             <Navbar />
             <ContactUs />
+            <Footer />
+          </>
+        } />
+             <Route path="/cart" element={
+          <>
+            <Navbar />
+            <Cart/>
             <Footer />
           </>
         } />

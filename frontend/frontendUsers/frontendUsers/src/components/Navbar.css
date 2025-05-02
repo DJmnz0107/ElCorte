@@ -21,10 +21,6 @@
 
 /* Navbar principal */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
   height: var(--navbar-height);
   background-color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -33,6 +29,41 @@
   top: 0;
   left: 0;
   z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Secciones principales del navbar */
+.navbar-section {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.navbar-logo-section {
+  flex: 1;
+  justify-content: flex-start;
+  z-index: 1002; /* Asegura que el logo esté por encima del overlay y del menu móvil */
+}
+
+.navbar-menu-section {
+  flex: 2;
+  justify-content: center;
+}
+
+.navbar-actions-section {
+  flex: 1;
+  justify-content: flex-end;
+  gap: 1.2rem;
 }
 
 /* Contenedor del logo */
@@ -62,8 +93,7 @@
   gap: 1.8rem;
   align-items: center;
   height: 100%;
-  margin: 0 auto;
-  padding: 0 1rem;
+  justify-content: center;
 }
 
 .navbar-item {
@@ -114,14 +144,14 @@
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   min-width: 200px;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
   transition: all 0.25s ease-out;
   z-index: 100;
   pointer-events: none;
@@ -130,7 +160,7 @@
 .dropdown-menu.show {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
 
@@ -154,7 +184,7 @@
   display: flex;
   align-items: center;
   transition: all var(--transition-duration) var(--transition-timing);
-  margin-right: 15px;
+  margin-right: 5px;
 }
 
 .navbar-search.expanded {
@@ -194,12 +224,6 @@
 }
 
 /* Acciones del usuario */
-.navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-}
-
 .navbar-login {
   color: var(--color-primary);
   text-decoration: none;
@@ -220,6 +244,7 @@
   position: relative;
   cursor: pointer;
   transition: transform 0.2s ease;
+  display: flex;
 }
 
 .navbar-cart:hover {
@@ -242,6 +267,16 @@
   font-weight: bold;
 }
 
+.navbar-language-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
 .navbar-globe {
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -255,6 +290,7 @@
 .mobile-menu-toggle {
   display: none;
   z-index: 1001;
+  margin-left: auto;
 }
 
 .menu-toggle-button {
@@ -274,7 +310,11 @@
   width: 100%;
   padding: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  justify-content: flex-end;
+  align-items: center;
 }
+
+/* Eliminados los estilos del logo móvil duplicado */
 
 .close-mobile-menu {
   background: none;
@@ -317,7 +357,7 @@
 .mobile-search-container {
   position: relative;
   width: 100%;
-  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .mobile-search-input {
@@ -335,6 +375,43 @@
   top: 50%;
   transform: translateY(-50%);
   color: #777;
+}
+
+/* Estilos para el carrito móvil */
+.mobile-cart-container {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.mobile-cart-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  color: var(--color-primary);
+  text-decoration: none;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  position: relative;
+}
+
+.mobile-cart-text {
+  margin-left: 15px;
+  font-weight: 500;
+}
+
+/* Selector de idioma en móvil */
+.mobile-language-selector {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mobile-globe-icon {
+  margin-right: 15px;
+  color: var(--color-primary);
 }
 
 /* Overlay del menú móvil */
@@ -355,9 +432,28 @@ body {
 }
 
 /* Media Queries para responsividad */
-@media (max-width: 992px) {
-  .navbar {
+@media (max-width: 1200px) {
+  .navbar-container {
     padding: 0 1rem;
+  }
+  
+  .navbar-menu {
+    gap: 1.2rem;
+  }
+  
+  .navbar-actions-section {
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-item {
+    font-size: 1rem;
+  }
+  
+  .navbar-login {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
   }
   
   .navbar-menu {
@@ -371,12 +467,16 @@ body {
     display: block;
   }
   
-  .navbar-actions {
+  .navbar-actions-section {
     display: none;
   }
   
-  /* Transformar el menú principal en drawer vertical */
-  .navbar-menu {
+  .navbar-container {
+    padding: 0 1rem;
+  }
+  
+  /* Transformar estructura de secciones */
+  .navbar-menu-section {
     position: fixed;
     top: 0;
     right: -100%;
@@ -385,23 +485,32 @@ body {
     background-color: var(--mobile-menu-bg);
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px 0;
+    justify-content: flex-start;
+    padding: 0;
     margin: 0;
-    gap: 0;
     box-shadow: -3px 0 15px rgba(0, 0, 0, 0.15);
     transition: right 0.3s ease;
     overflow-y: auto;
     z-index: 1000;
   }
   
-  .navbar-menu.mobile-open {
+  .navbar-menu-section.mobile-open {
     right: 0;
   }
   
-  /* Mostrar cabecera del menú móvil */
+  /* Mostrar cabecera del menú móvil, solo con el botón de cerrar */
   .mobile-menu-header {
     display: flex;
-    justify-content: flex-end;
+    height: var(--navbar-height);
+  }
+  
+  /* Reorganizar el menú principal */
+  .navbar-menu {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    align-items: flex-start;
+    padding: 10px 0;
   }
   
   /* Ajustar ítems del menú */
@@ -431,10 +540,11 @@ body {
     box-shadow: none;
     border-radius: 0;
     background-color: #f9f9f9;
-    transform: none;
+    transform: none !important;
     transition: max-height 0.3s ease, opacity 0.3s ease;
     max-height: 0;
     overflow: hidden;
+    left: 0;
   }
   
   .dropdown-menu.show {
@@ -455,6 +565,10 @@ body {
 /* Media query para tablets pequeñas y dispositivos móviles grandes */
 @media (max-width: 576px) {
   .navbar {
+    padding: 0;
+  }
+  
+  .navbar-container {
     padding: 0 0.5rem;
   }
   
