@@ -96,12 +96,6 @@ const Navbar = () => {
       {/* Menú con dropdowns - Versión desktop */}
       <div className={`navbar-menu ${mobileMenuOpen ? 'mobile-open' : ''}`}>
         <div className="mobile-menu-header">
-          <button 
-            className="close-mobile-menu"
-            onClick={toggleMobileMenu}
-          >
-            <X size={24} />
-          </button>
         </div>
         
         <Link to="/" className="navbar-item" onClick={() => setMobileMenuOpen(false)}>Inicio</Link>
@@ -123,7 +117,6 @@ const Navbar = () => {
           <div className={`dropdown-menu ${activeDropdown === 'tienda' ? 'show' : ''}`}>
             <Link to="/tienda" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Productos</Link>
             <Link to="/TermsAndConditions" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Términos y Condiciones</Link>
-            <Link to="/envios" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Envíos y Devoluciones</Link>
           </div>
         </div>
         
@@ -144,9 +137,8 @@ const Navbar = () => {
           </button>
           
           <div className={`dropdown-menu ${activeDropdown === 'mas' ? 'show' : ''}`}>
-            <Link to="/contacto" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Contacto</Link>
-            <Link to="/preguntas" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Preguntas Frecuentes</Link>
-            <Link to="/blog" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
+            <Link to="/contact" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Contacto</Link>
+
           </div>
         </div>
         

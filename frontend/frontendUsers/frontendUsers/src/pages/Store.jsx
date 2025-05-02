@@ -89,9 +89,6 @@ const Store = () => {
           ))}
         </div>
       </div>
-      <div>
-      <Link to="/confirm-payment">Probar</Link>      
-      </div>
     </div>
   );
 };
