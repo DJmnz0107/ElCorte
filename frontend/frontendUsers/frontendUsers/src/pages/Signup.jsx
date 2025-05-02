@@ -1,15 +1,24 @@
+// Importación de React
 import React from 'react';
+// Importación del archivo CSS correspondiente
 import '../css/register.css';
 
+// Componente funcional SignUp (formulario de registro)
 const SignUp = () => {
   return (
     <div className="signup-container">
-      {/* Sección del formulario - Posicionada más arriba */}
+      
+      {/* Sección principal del formulario de registro */}
       <div className="signup-form-section">
         <div className="signup-form-wrapper">
+          
+          {/* Título principal con emoji */}
           <h1 className="signup-title">Únete al goce <span className="emoji">🍴</span></h1>
           
+          {/* Formulario de registro */}
           <form className="signup-form">
+
+            {/* Grupo para nombre y apellido */}
             <div className="name-row">
               <div className="form-group">
                 <label htmlFor="name">Nombre</label>
@@ -31,7 +40,8 @@ const SignUp = () => {
                 />
               </div>
             </div>
-            
+
+            {/* Campo de correo electrónico */}
             <div className="form-group">
               <label htmlFor="email">Correo Electrónico</label>
               <input
@@ -41,7 +51,8 @@ const SignUp = () => {
                 className="form-input"
               />
             </div>
-            
+
+            {/* Campo de contraseña con botón para mostrarla (funcionalidad no implementada aún) */}
             <div className="form-group">
               <label htmlFor="password">Contraseña</label>
               <div className="password-input">
@@ -59,7 +70,8 @@ const SignUp = () => {
                 </button>
               </div>
             </div>
-            
+
+            {/* Campo de fecha de nacimiento */}
             <div className="form-group date-group">
               <label htmlFor="birthdate">Fecha de Nacimiento</label>
               <input
@@ -68,15 +80,18 @@ const SignUp = () => {
                 className="date-input"
               />
             </div>
-            
+
+            {/* Botón de envío del formulario */}
             <button type="submit" className="submit-button">
               Registrarse
             </button>
-            
+
+            {/* Separador visual */}
             <div className="divider">
               <span>o</span>
             </div>
-            
+
+            {/* Botón para registrarse con Google */}
             <button type="button" className="google-button">
               <img 
                 src="https://www.svgrepo.com/show/475656/google-color.svg" 
@@ -85,8 +100,8 @@ const SignUp = () => {
               />
               Continuar con Google
             </button>
-            
-            {/* Texto de cuenta existente ajustado */}
+
+            {/* Enlace para usuarios ya registrados */}
             <p className="existing-account">
               ¿Tienes una cuenta? <a href="/login">Inicia sesión aquí</a>
             </p>
@@ -94,14 +109,15 @@ const SignUp = () => {
         </div>
       </div>
       
-      {/* Banner lateral derecho */}
+      {/* Sección lateral derecha para posible imagen o contenido promocional */}
       <div className="signup-banner">
         <div className="banner-content">
-      
+          {/* Puedes añadir aquí una imagen, texto o branding */}
         </div>
       </div>
     </div>
   );
 };
 
+// Exporta el componente para su uso en rutas
 export default SignUp;
