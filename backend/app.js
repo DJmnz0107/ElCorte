@@ -37,5 +37,8 @@ app.use("/api/payments" , paymentsRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/logout", logoutRoutes);
 app.use("/api/recovery", recoveryPasswordRoutes);
+app.use("/api/recovery", recoveryPasswordRoutes);
+app.use("/api/recovery", recoveryPasswordRoutes);
 
 export default app;
+//ESTO ES UNA PRUEBA
