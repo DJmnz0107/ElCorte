@@ -1,16 +1,27 @@
+// Importa React y el hook useState para manejar estados locales
 import React, { useState } from 'react';
+
+// Importa Link para enlaces y useNavigate para redireccionar
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
+// Importa componentes usados en esta página
 import PromoHeader from '../components/PromoHeader';
 import ProductCard from '../components/ProductCard';
 import CategoryFilter from '../components/CategoryFilter';
 
+// Componente principal de la tienda
 const Store = () => {
+  // Estado para manejar la categoría seleccionada
   const [activeCategory, setActiveCategory] = useState('Todos');
+
+  // Hook de navegación para redireccionar a detalle de producto
   const navigate = useNavigate();
-  
+
+  // Lista de categorías disponibles
   const categories = ['Todos', 'Carnes', 'Promociones', 'Accesorios', 'Paquetes'];
-  
+
+  // Datos de productos (mocked/static)
   const products = [
     {
       id: 1,
@@ -58,27 +69,33 @@ const Store = () => {
     }
   ];
 
-
+  // Filtrado de productos según categoría activa
   const filteredProducts = activeCategory === 'Todos' 
     ? products 
-    : products.filter(product => product.category === activeCategory || 
-                              (activeCategory === 'Promociones' && product.promo));
+    : products.filter(product => 
+        product.category === activeCategory || 
+        (activeCategory === 'Promociones' && product.promo)
+      );
 
+  // Función que maneja el clic sobre un producto y redirige a su detalle
   const handleProductClick = (product) => {
     navigate('/product-detail', { state: { product } });
   };
 
   return (
     <div className="store-page">
+      {/* Encabezado promocional */}
       <PromoHeader />
       
       <div className="store-container">
+        {/* Componente de filtros de categoría */}
         <CategoryFilter 
           categories={categories}
           activeCategory={activeCategory}
           onSelect={setActiveCategory}
         />
         
+        {/* Renderizado de productos filtrados */}
         <div className="products-container">
           {filteredProducts.map(product => (
             <ProductCard 
@@ -93,4 +110,5 @@ const Store = () => {
   );
 };
 
+// Exporta el componente para su uso en rutas u otros componentes
 export default Store;
