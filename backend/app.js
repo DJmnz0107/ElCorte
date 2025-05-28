@@ -10,6 +10,8 @@ import purchasesRoutes from './src/routes/purchases.js';
 import suppliersRoutes from './src/routes/suppliers.js';
 import customersRoutes from './src/routes/customers.js';
 import paymentsRoutes from './src/routes/paymentMethods.js';
+import loginRoutes from './src/routes/login.js';
+import logoutRoutes from './src/routes/logout.js';
 
 const app = express();
 
@@ -29,5 +31,7 @@ app.use("/api/purchases" , purchasesRoutes);
 app.use("/api/suppliers" , suppliersRoutes);
 app.use("/api/customers" , customersRoutes);
 app.use("/api/payments" , paymentsRoutes);
+app.use("/api/login", loginRoutes);
+app.use("/api/logout", logoutRoutes);
 
 export default app;

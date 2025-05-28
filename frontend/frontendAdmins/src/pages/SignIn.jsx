@@ -1,16 +1,63 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../css/signin.css'; // Archivo CSS separado
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import useDataLogin from '../components/Login/hooks/useDataLoginInterface';
+import '../css/signin.css';
+import { Toaster, toast } from 'react-hot-toast';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    handleLogin,
+    errorLogin,
+    loading,
+    user,
+  } = useDataLogin();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const onSubmit = async (e) => {
+  e.preventDefault();
+  const loggedUser = await handleLogin();
+  console.log('loggedUser:', loggedUser);
+
+  if (loggedUser) {
+    const role = loggedUser.role.toLowerCase();
+
+    if (loggedUser.userType === 'client') {
+      toast.error('Los clientes no pueden iniciar sesión desde aquí.');
+    } else if (loggedUser.userType === 'employee') {
+      if (role === 'admin' || role === 'employee') {
+        toast.success('Inicio de sesión exitoso.');
+        navigate('/dashboard');
+      } else {
+        toast.error('Rol no reconocido.');
+      }
+    } else {
+      toast.error('Tipo de usuario no válido.');
+    }
+  } else {
+    toast.error('Usuario o contraseña incorrectos.');
+  }
+};
+
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="login-container">
-      {/* Sección del formulario - Más arriba y a la izquierda */}
+      <Toaster position="top-right" />
       <div className="login-form-section">
         <div className="login-form">
           <h1 className="login-title">Bienvenido</h1>
-          
-          <form className="form">
+
+          <form className="form" onSubmit={onSubmit}>
             <div className="form-group">
               <label htmlFor="email">Correo Electrónico</label>
               <input
@@ -18,27 +65,35 @@ const Login = () => {
                 id="email"
                 placeholder="usuario@ejemplo.com"
                 className="form-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
-            
+
             <div className="form-group">
               <label htmlFor="password">Contraseña</label>
               <div className="password-input">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder="••••••••••••••••"
                   className="form-input password-long"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
-                <button type="button" className="show-password">
-                  <svg viewBox="0 0 24 24" width="20" height="20">
-                    <path d="M12 5c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"/>
-                    <path d="M12 9c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"/>
-                  </svg>
+                <button 
+                  type="button" 
+                  className="show-password"
+                  onClick={togglePasswordVisibility}
+                  aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
             </div>
-            
+
             <div className="form-options">
               <div className="remember-me">
                 <input type="checkbox" id="remember" />
@@ -48,32 +103,27 @@ const Login = () => {
                 ¿Olvidaste tu contraseña?
               </Link>
             </div>
-            
-            <Link to="/dashboard">
-             <button type="submit" className="submit-button">
-              Ingresar
+
+            <button type="submit" className="submit-button" disabled={loading}>
+              {loading ? 'Ingresando...' : 'Ingresar'}
             </button>
-            </Link>
-           
-            
+
+            {errorLogin && <p style={{ color: 'red' }}>{errorLogin}</p>}
+
             <div className="divider">
               <span>o continuar con</span>
             </div>
-            
-    
-            
+
             <div className="register-link">
               ¿No tienes una cuenta? <Link to="/signup">Regístrate aquí</Link>
             </div>
           </form>
         </div>
       </div>
-      
-      {/* Sección del banner */}
+
       <div className="login-banner-section">
         <div className="login-banner">
-          <div className="banner-content">
-          </div>
+          <div className="banner-content"></div>
         </div>
       </div>
     </div>
