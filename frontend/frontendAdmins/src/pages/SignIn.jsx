@@ -49,9 +49,12 @@ const Login = () => {
               </Link>
             </div>
             
-            <button type="submit" className="submit-button">
+            <Link to="/dashboard">
+             <button type="submit" className="submit-button">
               Ingresar
             </button>
+            </Link>
+           
             
             <div className="divider">
               <span>o continuar con</span>

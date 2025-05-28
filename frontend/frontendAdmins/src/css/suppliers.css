@@ -1,0 +1,248 @@
+/* css/suppliers.css */
+.suppliers-container {
+   max-width: 1200px;
+  margin: 0 auto;
+  margin-left: 270px; /* 250px del sidebar + 20px de margen */
+  width: calc(100% - 270px); /* Resta el ancho del sidebar */
+  padding: 20px;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.suppliers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.suppliers-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.suppliers-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: #6b7280;
+  font-size: 18px;
+  z-index: 1;
+}
+
+.search-input {
+  padding: 10px 12px 10px 42px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 250px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.btn-add {
+  background-color: #9B1B30;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.btn-add:hover {
+  background-color: #7d1626;
+  transform: translateY(-1px);
+}
+
+.btn-add:focus {
+  outline: 2px solid #9B1B30;
+  outline-offset: 2px;
+}
+
+.btn-add:active {
+  transform: translateY(0);
+}
+
+.suppliers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f4f6;
+  border-top: 3px solid #9B1B30;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-suppliers {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.no-suppliers p {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.no-suppliers p:first-child {
+  font-size: 18px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .suppliers-container {
+    padding: 16px;
+  }
+  
+  .suppliers-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .suppliers-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+  
+  .suppliers-actions {
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .search-input {
+    width: 200px;
+  }
+  
+  .suppliers-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  
+  .suppliers-title {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .suppliers-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .search-container {
+    width: 100%;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .btn-add {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .suppliers-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .suppliers-container {
+    padding: 12px;
+  }
+  
+  .suppliers-title {
+    font-size: 20px;
+  }
+  
+  .loading-container {
+    padding: 40px 20px;
+  }
+  
+  .no-suppliers {
+    padding: 40px 20px;
+  }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    animation: none;
+  }
+  
+  .btn-add:hover {
+    transform: none;
+  }
+  
+  .supplier-card:hover {
+    transform: none;
+  }
+}
+
+/* Focus visible mejorado */
+.search-input:focus-visible,
+.btn-add:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
