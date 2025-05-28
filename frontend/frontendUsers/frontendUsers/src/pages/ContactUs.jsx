@@ -1,13 +1,20 @@
+// Importa React y useState para manejar estado local
 import { useState } from 'react';
+
+// Importa el componente del mapa y el formulario de contacto desde su carpeta correspondiente
 import { GoogleMap } from '../components/MapComponent';
 import { ContactForm } from '../components/ContactForm';
-import morenoImage from '../assets/moreno_pensante.png';
-import '../css/ContactUs.css';
 
+// Importa la imagen y estilos CSS específicos para esta página
+import morenoImage from '../assets/moreno_pensante.png';
+import '../css/contactUs.css';
+
+// Componente principal de la página de contacto
 const ContactUs = () => {
+  // Define el centro del mapa (latitud y longitud de la ubicación)
   const [mapCenter] = useState({
     lat: 13.722996,
-    lng:   -89.205334, 
+    lng: -89.205334,
   });
 
   return (
@@ -66,3 +73,4 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../css/ContactForm.css';
 
+
 export const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -146,6 +147,6 @@ export const ContactForm = () => {
           {isSubmitting ? 'Enviando...' : 'Enviar'}
         </button>
       </form>
-    </div>
-  );
+    </div>
+  );
 };
