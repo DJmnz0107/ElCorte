@@ -49,7 +49,7 @@ const Dashboard = ({ userName = "Marcos López" }) => {
       <div className="dashboard-header">
         <h1 className="dashboard-title">
           Bienvenido@ al servicio de gestión de la tienda El Corte, 
-          <span className="user-name">       <p className="user-name">{user.name}</p></span>
+          <span className="user-name">{user.name}</span>
         </h1>
       </div>
 
