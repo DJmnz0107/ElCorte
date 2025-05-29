@@ -1,4 +1,4 @@
-.contact-form {
+    .contact-form {
     background-color: #fff;
     padding: 1.5rem;
     border-radius: 8px;
@@ -96,5 +96,6 @@
     
     .submit-button {
       padding: 0.6rem 1.25rem;
+    }
 }
-  }
+  

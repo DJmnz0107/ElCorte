@@ -112,6 +112,13 @@ function App() {
             <Footer />
           </>
         } />
+        <Route path="/ContactUs" element={
+          <>
+            <Navbar/>
+            <ContactUs/>
+            <Footer />
+          </>
+        } />
 
         {/* Ruta comodín para páginas no encontradas (404) */}
         <Route path="*" element={

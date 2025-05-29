@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import Sidebar from './components/SideNavBar';
 import Suppliers from './pages/Suppliers';
 import Products from './pages/Products';
+import Employees from "./pages/Employees";
 import './App.css';
 
 function App() {
@@ -54,12 +55,12 @@ function App() {
         <Route path="/first-use" element={!adminExists ? <FirstUse /> : <Navigate to="/login" />} />
 
         <Route path="/dashboard" element={
-          
-           <>
-    <Sidebar/>
-    <Dashboard />
-  </>} 
-/>
+          <>
+            <Sidebar />
+            <Dashboard />
+          </>
+        } />
+
         <Route path="/proveedores" element={
           <>
             <Sidebar />
@@ -73,9 +74,16 @@ function App() {
             <Products />
           </>
         } />
-        
+
+        <Route path="/empleados" element={
+          <>
+            <Sidebar />
+            <Employees />
+          </>
+        } />
+
         {/* Redirige a /dashboard si no hay ruta coincidente */}
-        <Route path="*" element={<Navigate to="/dashboard" />}/>
+        <Route path="*" element={<Navigate to="/dashboard" />} />
       </Routes>
     </>
   );
