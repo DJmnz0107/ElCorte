@@ -10,6 +10,7 @@ import FirstUse from './pages/FirstUse';
 import Dashboard from "./pages/Dashboard";
 import Sidebar from './components/SideNavBar';
 import Suppliers from './pages/Suppliers';
+import Products from './pages/Products';
 import './App.css';
 
 function App() {
@@ -63,6 +64,13 @@ function App() {
           <>
             <Sidebar />
             <Suppliers />
+          </>
+        } />
+
+        <Route path="/productos" element={
+          <>
+            <Sidebar />
+            <Products />
           </>
         } />
         

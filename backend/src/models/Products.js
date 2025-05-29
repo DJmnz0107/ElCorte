@@ -1,62 +1,47 @@
-/*
-Campos
-price
-productName
-productDescription
-discount
-stock
-image
-categoriesID
-suppliersID
-*/
-
+/* Campos price productName productDescription discount stock image categoriesID suppliersID */
 import {Schema, model} from "mongoose";
 
-const productsSchema = new Schema (
-
+const productsSchema = new Schema(
     {
         price: {
-            type:Number,
-            require:true,
+            type: Number,
+            required: true,  // ✅ CORREGIDO: require → required
             min: 0
         },
         productName: {
-            type:String,
-            require:true
+            type: String,
+            required: true   // ✅ CORREGIDO: require → required
         },
         productDescription: {
-            type:String,
-            require:true
+            type: String,
+            required: true   // ✅ CORREGIDO: require → required
         },
         discount: {
-            type:Number,
+            type: Number,
+            default: 0       // ✅ AGREGADO: valor por defecto
         },
         stock: {
-            type:Number,
-            require:true
+            type: Number,
+            required: true   // ✅ CORREGIDO: require → required
         },
         image: {
-            type:String
+            type: String
         },
         categoriesID: {
-            type:Schema.Types.ObjectId,
-            ref:"Categories",
-            require:true
+            type: Schema.Types.ObjectId,
+            ref: "Categories",
+            required: true   // ✅ CORREGIDO: require → required
         },
         suppliersID: {
-            type:Schema.Types.ObjectId,
-            ref:"Suppliers",
-            require:true
+            type: Schema.Types.ObjectId,
+            ref: "Suppliers",
+            required: true   // ✅ CORREGIDO: require → required
         },
-
-
-
     },
     {
-        timestamps:true,
-        strict:false
+        timestamps: true,
+        strict: false
     }
-
 );
 
 export default model("Products", productsSchema);
