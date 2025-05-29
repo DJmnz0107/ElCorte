@@ -15,13 +15,14 @@ const useDataLogin = () => {
     const response = await fetch('http://localhost:4000/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include', // ← Esta línea es clave
       body: JSON.stringify({ email, password }),
     });
 
     if (!response.ok) throw new Error('Usuario o contraseña incorrectos.');
 
     const data = await response.json();
-    setUser(data.user);  // Asumiendo que backend envía { user: {...} }
+    setUser(data.user);
     setLoading(false);
     return data.user;
   } catch (error) {

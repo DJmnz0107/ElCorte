@@ -11,47 +11,60 @@ import {
   MdMenu,
   MdClose
 } from 'react-icons/md';
+import { useAuth } from '../context/AuthContext'; // Importar el contexto
 import '../css/sidebar.css';
 import elCorteLogo from '../assets/elCorte.png'; 
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const { user, isAdmin, logout: authLogout } = useAuth(); // Usar el contexto
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
+  // Definir elementos del menú con roles
   const menuItems = [
     {
       id: 'dashboard',
       label: 'Dashboard',
       icon: MdDashboard,
-      path: '/dashboard'
+      path: '/dashboard',
+      roles: ['Admin', 'Employee'] // Ambos pueden ver
     },
     {
       id: 'empleados',
       label: 'Empleados',
       icon: MdPeople,
-      path: '/empleados'
+      path: '/empleados',
+      roles: ['Admin'] // Solo Admin
     },
     {
       id: 'proveedores',
       label: 'Proveedores',
       icon: MdStore,
-      path: '/proveedores'
+      path: '/proveedores',
+      roles: ['Admin', 'Employee'] // Ambos pueden ver
     },
     {
       id: 'clientes',
       label: 'Clientes',
       icon: MdPerson,
-      path: '/clientes'
+      path: '/clientes',
+      roles: ['Admin', 'Employee'] // Ambos pueden ver
     },
     {
       id: 'productos',
       label: 'Productos',
       icon: MdShoppingCart,
-      path: '/productos'
+      path: '/productos',
+      roles: ['Admin', 'Employee'] // Ambos pueden ver
     }
   ];
+
+  // Filtrar elementos del menú según el rol del usuario
+  const filteredMenuItems = menuItems.filter(item => 
+    item.roles.includes(user?.role)
+  );
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -91,7 +104,8 @@ const Sidebar = () => {
         credentials: 'include',
       });
 
-      localStorage.removeItem('token');
+      // Usar la función logout del contexto
+      authLogout();
       setShowLogoutModal(false);
       toast.success('Sesión cerrada correctamente');
       navigate('/login');
@@ -129,11 +143,12 @@ const Sidebar = () => {
           <div className="sidebar-title">
             <img src={elCorteLogo} alt="El Corte Logo" className="logo-image" />
           </div>
+          {/* Mostrar información del usuario */}
         </div>
         
         <nav className="sidebar-nav">
           <ul className="nav-list">
-            {menuItems.map((item) => {
+            {filteredMenuItems.map((item) => {
               const IconComponent = item.icon;
               return (
                 <li key={item.id} className="nav-item">

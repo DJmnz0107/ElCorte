@@ -2,6 +2,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Toaster } from 'react-hot-toast';
 
+import { AuthProvider } from './context/AuthContext';
+import { ProtectedRoute, AdminRoute, PublicRoute } from './components/ProtectedRoutes';
+
 import SignIn from './pages/SignIn';
 import RecoveryPassword from './pages/RecoveryPassword';
 import VerifyCode from './pages/VerifyCode';
@@ -14,9 +17,9 @@ import Products from './pages/Products';
 import Employees from "./pages/Employees";
 import './App.css';
 
-function App() {
+function AppContent() {
   const [checking, setChecking] = useState(true);
-  const [adminExists, setAdminExists] = useState(false); // Cambiado a false por defecto
+  const [adminExists, setAdminExists] = useState(false);
 
   useEffect(() => {
     const checkAdmin = async () => {
@@ -26,7 +29,7 @@ function App() {
         setAdminExists(data.existeAdmin);
       } catch (err) {
         console.error("Error al verificar admin:", err);
-        setAdminExists(true); // Por seguridad, asumir que sí hay si hay error
+        setAdminExists(true);
       } finally {
         setChecking(false);
       }
@@ -44,48 +47,79 @@ function App() {
         {/* Redirige a /first-use si no hay admin, o a /login si sí existe */}
         <Route path="/" element={adminExists ? <Navigate to="/login" /> : <Navigate to="/first-use" />} />
         
-        {/* Solo muestra login si ya existe admin */}
-        <Route path="/login" element={adminExists ? <SignIn /> : <Navigate to="/first-use" />} />
+        {/* Rutas públicas (no requieren autenticación) */}
+        <Route path="/login" element={
+          <PublicRoute>
+            {adminExists ? <SignIn /> : <Navigate to="/first-use" />}
+          </PublicRoute>
+        } />
         
-        <Route path="/forgot-password" element={<RecoveryPassword />} />
-        <Route path="/verify-code" element={<VerifyCode />} />
-        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/forgot-password" element={
+          <PublicRoute>
+            <RecoveryPassword />
+          </PublicRoute>
+        } />
         
-        {/* Solo muestra first-use si no hay admin */}
-        <Route path="/first-use" element={!adminExists ? <FirstUse /> : <Navigate to="/login" />} />
+        <Route path="/verify-code" element={
+          <PublicRoute>
+            <VerifyCode />
+          </PublicRoute>
+        } />
+        
+        <Route path="/change-password" element={
+          <PublicRoute>
+            <ChangePassword />
+          </PublicRoute>
+        } />
+        
+        <Route path="/first-use" element={
+          <PublicRoute>
+            {!adminExists ? <FirstUse /> : <Navigate to="/login" />}
+          </PublicRoute>
+        } />
 
+        {/* Rutas protegidas (requieren autenticación) */}
         <Route path="/dashboard" element={
-          <>
+          <ProtectedRoute>
             <Sidebar />
             <Dashboard />
-          </>
+          </ProtectedRoute>
         } />
 
         <Route path="/proveedores" element={
-          <>
+          <ProtectedRoute>
             <Sidebar />
             <Suppliers />
-          </>
+          </ProtectedRoute>
         } />
 
         <Route path="/productos" element={
-          <>
+          <ProtectedRoute>
             <Sidebar />
             <Products />
-          </>
+          </ProtectedRoute>
         } />
 
+        {/* Ruta solo para Admin */}
         <Route path="/empleados" element={
-          <>
+          <AdminRoute>
             <Sidebar />
             <Employees />
-          </>
+          </AdminRoute>
         } />
 
         {/* Redirige a /dashboard si no hay ruta coincidente */}
         <Route path="*" element={<Navigate to="/dashboard" />} />
       </Routes>
     </>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 

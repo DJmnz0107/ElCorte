@@ -3,11 +3,14 @@ import React from 'react';
 import StatsCard from '../components/StatsCard';
 import DonutChart from '../components/DonutChart';
 import BarChart from '../components/BarChart';
+import { useAuth } from '../context/AuthContext'; // Importar el contexto
 import LineChart from '../components/LineChart';
 import CategoryChart from '../components/CategoryChart';
 import '../css/dashboard.css';
 
 const Dashboard = ({ userName = "Marcos López" }) => {
+
+    const { user, isAdmin, logout: authLogout } = useAuth(); // Usar el contexto
   // Datos de ejemplo
   const statsData = {
     totalSales: 5000.00,
@@ -46,7 +49,7 @@ const Dashboard = ({ userName = "Marcos López" }) => {
       <div className="dashboard-header">
         <h1 className="dashboard-title">
           Bienvenido@ al servicio de gestión de la tienda El Corte, 
-          <span className="user-name">{userName}</span>
+          <span className="user-name">       <p className="user-name">{user.name}</p></span>
         </h1>
       </div>
 

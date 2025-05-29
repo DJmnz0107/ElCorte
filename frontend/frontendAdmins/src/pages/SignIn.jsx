@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Importar el contexto
 import useDataLogin from '../components/Login/hooks/useDataLoginInterface';
 import '../css/signin.css';
 import { Toaster, toast } from 'react-hot-toast';
@@ -17,34 +18,49 @@ const Login = () => {
     user,
   } = useDataLogin();
 
+  const { login } = useAuth(); // Usar el contexto de autenticación
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
-  e.preventDefault();
-  const loggedUser = await handleLogin();
-  console.log('loggedUser:', loggedUser);
+    e.preventDefault();
+    const loggedUser = await handleLogin();
+    console.log('loggedUser:', loggedUser);
 
-  if (loggedUser) {
-    const role = loggedUser.role.toLowerCase();
+    if (loggedUser) {
+      const role = loggedUser.role.toLowerCase();
 
-    if (loggedUser.userType === 'client') {
-      toast.error('Los clientes no pueden iniciar sesión desde aquí.');
-    } else if (loggedUser.userType === 'employee') {
-      if (role === 'admin' || role === 'employee') {
-        toast.success('Inicio de sesión exitoso.');
-        navigate('/dashboard');
+      if (loggedUser.userType === 'client') {
+        toast.error('Los clientes no pueden iniciar sesión desde aquí.');
+      } else if (loggedUser.userType === 'employee') {
+        if (role === 'admin' || role === 'employee') {
+          // Preparar datos del usuario para el contexto
+          const userData = {
+            id: loggedUser.id,
+            name: loggedUser.name || loggedUser.email,
+            email: loggedUser.email,
+            role: role === 'admin' ? 'Admin' : 'Employee', // Normalizar el rol
+            userType: loggedUser.userType
+          };
+
+          // Obtener el token (asumiendo que viene en la respuesta)
+          const token = loggedUser.token || localStorage.getItem('token');
+
+          // Usar el contexto para guardar el estado del usuario
+          login(userData, token);
+
+          toast.success('Inicio de sesión exitoso.');
+          navigate('/dashboard');
+        } else {
+          toast.error('Rol no reconocido.');
+        }
       } else {
-        toast.error('Rol no reconocido.');
+        toast.error('Tipo de usuario no válido.');
       }
     } else {
-      toast.error('Tipo de usuario no válido.');
+      toast.error('Usuario o contraseña incorrectos.');
     }
-  } else {
-    toast.error('Usuario o contraseña incorrectos.');
-  }
-};
-
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
