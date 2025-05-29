@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import Sidebar from './components/SideNavBar';
 import Suppliers from './pages/Suppliers';
 import './App.css';
+import Employees from "./pages/Employees";
 
 function App() {
   const [checking, setChecking] = useState(true);
@@ -63,6 +64,13 @@ function App() {
           <>
             <Sidebar />
             <Suppliers />
+          </>
+        } />
+
+        <Route path="/empleados" element={
+          <>
+            <Sidebar />
+            <Employees />
           </>
         } />
         

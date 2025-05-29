@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import '../css/MapComponent.css';
+import '../css/mapComponent.css';
 
 export const GoogleMap = ({ center, zoom }) => {
   const mapRef = useRef(null);
@@ -85,6 +85,6 @@ export const GoogleMap = ({ center, zoom }) => {
 };
 
 
-GoogleMap.defaultProps = {
-  zoom: 15
+GoogleMap.defaultProps = {
+  zoom: 15
 };
