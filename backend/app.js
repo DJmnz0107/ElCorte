@@ -12,11 +12,7 @@ import suppliersRoutes from './src/routes/suppliers.js';
 import customersRoutes from './src/routes/customers.js';
 import paymentsRoutes from './src/routes/paymentMethods.js';
 import loginRoutes from './src/routes/login.js';
-import logoutRoutes from './src/routes/logout.js';
-import logoutRoutes from './src/routes/logout.js';
-import logoutRoutes from './src/routes/logout.js';
-import logoutRoutes from './src/routes/logout.js';
-import logoutRoutes from './src/routes/logout.js';
+
 import recoveryPasswordRoutes from './src/routes/recoveryPassword.js';
 
 const app = express();
