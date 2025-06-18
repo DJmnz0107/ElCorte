@@ -21,7 +21,7 @@ const ContactUs = () => {
     <div className="contact-page">
       <section className="encuentranos">
         <div className="container">
-          <h1>Encuentranos!</h1>
+          <h1>¡Encuéntranos!</h1>
           <p>Visítanos en nuestra ubicación central, donde podrás encontrar todos nuestros servicios y productos.</p>
           <p>Estamos disponibles de lunes a viernes de 9:00 AM a 6:00 PM y los sábados de 10:00 AM a 2:00 PM.</p>
           <p>¡Te esperamos para brindarte la mejor atención personalizada!</p>
@@ -37,7 +37,7 @@ const ContactUs = () => {
           <div className="contact-grid">
             <div className="contact-text-form">
               <div className="contact-info">
-                <h2>Contactanos</h2>
+                <h2>Contáctanos</h2>
                 <p>Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
                 <p>También puedes comunicarte directamente con nosotros a través de nuestros canales de atención al cliente.</p>
                 

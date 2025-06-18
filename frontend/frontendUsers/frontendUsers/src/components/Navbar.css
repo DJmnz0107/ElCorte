@@ -52,7 +52,9 @@
 .navbar-logo-section {
   flex: 1;
   justify-content: flex-start;
-  z-index: 1002; /* Asegura que el logo esté por encima del overlay y del menu móvil */
+  z-index: 1002;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-menu-section {
@@ -73,6 +75,7 @@
   align-items: center;
   padding: 0 10px;
   z-index: 1001;
+  text-decoration: none;
 }
 
 /* Imagen del logo con tamaño controlado */
@@ -108,6 +111,7 @@
   position: relative;
   transition: all var(--transition-duration) var(--transition-timing);
   white-space: nowrap;
+  padding: 0 0.5rem;
 }
 
 .navbar-item:hover {
@@ -126,10 +130,19 @@
   border: none;
   cursor: pointer;
   font: inherit;
-  padding: 0;
+  padding: 0 0.5rem;
   height: 100%;
   display: flex;
   align-items: center;
+  color: var(--color-primary);
+  font-weight: 500;
+  font-size: var(--font-size-large);
+  transition: all var(--transition-duration) var(--transition-timing);
+}
+
+.dropdown-toggle:hover {
+  color: var(--color-hover);
+  font-weight: 600;
 }
 
 .dropdown-icon {
@@ -245,6 +258,8 @@
   cursor: pointer;
   transition: transform 0.2s ease;
   display: flex;
+  text-decoration: none;
+  color: var(--color-primary);
 }
 
 .navbar-cart:hover {
@@ -274,22 +289,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-}
-
-.navbar-globe {
-  cursor: pointer;
+  padding: 8px;
+  color: var(--color-primary);
   transition: transform 0.2s ease;
 }
 
-.navbar-globe:hover {
+.navbar-language-button:hover {
   transform: scale(1.1);
 }
 
 /* Toggle botón del menú móvil - Oculto por defecto */
 .mobile-menu-toggle {
   display: none;
-  z-index: 1001;
+  z-index: 1003;
   margin-left: auto;
 }
 
@@ -314,8 +326,6 @@
   align-items: center;
 }
 
-/* Eliminados los estilos del logo móvil duplicado */
-
 .close-mobile-menu {
   background: none;
   border: none;
@@ -324,6 +334,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 8px;
 }
 
 /* Estilos específicos para móvil */
@@ -378,11 +389,6 @@
 }
 
 /* Estilos para el carrito móvil */
-.mobile-cart-container {
-  margin-bottom: 15px;
-  width: 100%;
-}
-
 .mobile-cart-link {
   display: flex;
   align-items: center;
@@ -392,6 +398,7 @@
   background-color: #f8f8f8;
   border-radius: 4px;
   position: relative;
+  margin-bottom: 15px;
 }
 
 .mobile-cart-text {
@@ -498,7 +505,7 @@ body {
     right: 0;
   }
   
-  /* Mostrar cabecera del menú móvil, solo con el botón de cerrar */
+  /* Mostrar cabecera del menú móvil */
   .mobile-menu-header {
     display: flex;
     height: var(--navbar-height);
@@ -511,6 +518,7 @@ body {
     height: auto;
     align-items: flex-start;
     padding: 10px 0;
+    gap: 0;
   }
   
   /* Ajustar ítems del menú */
@@ -519,6 +527,7 @@ body {
     height: auto;
     padding: 15px 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    justify-content: flex-start;
   }
   
   /* Ajustar dropdowns */
@@ -532,6 +541,7 @@ body {
     justify-content: space-between;
     padding: 15px 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    height: auto;
   }
   
   .dropdown-menu {
@@ -549,6 +559,9 @@ body {
   
   .dropdown-menu.show {
     max-height: 300px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
   
   /* Mostrar acciones del usuario en el menú móvil */
