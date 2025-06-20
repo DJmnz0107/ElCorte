@@ -7,14 +7,20 @@ const ordersController = {};
 ordersController.getOrders = async (req, res) => {
   try {
     const orders = await Orders.find()
-      .populate("customersID", "firstName email") // Población de customersID
-      .populate("products.productID", "productName price"); // Población de productos
+      .populate("customersID", "firstName email")
+      .populate({
+        path: "products.productID",
+        select: "productName price productDescription image categoriesID", // Asegúrate que description esté aquí
+        populate: {
+          path: "categoriesID",
+          select: "categoryName"
+        }
+      });
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ message: "Error fetching orders", error: error.message });
   }
 };
-
 // POST: Crear una nueva orden
 ordersController.createOrders = async (req, res) => {
   const { customersID, products, status } = req.body;

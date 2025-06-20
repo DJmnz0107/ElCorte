@@ -61,31 +61,37 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Función para login
-  const login = async (email, password) => {
-    try {
-      const response = await fetch('http://localhost:4000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+  // En tu función login del AuthContext
+// En tu función login del AuthContext:
+const login = async (email, password) => {
+  try {
+    const response = await fetch('http://localhost:4000/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (data.success) {
-        // Guardar token en localStorage
-        localStorage.setItem('authToken', data.token);
-        setUser(data.user);
-        setIsAuthenticated(true);
-        return data;
-      } else {
-        throw new Error(data.message || 'Error en el login');
-      }
-    } catch (error) {
-      throw error;
+    if (data.success) {
+      localStorage.setItem('authToken', data.token);
+      // Normaliza los campos de ID
+      const userData = {
+        ...data.user,
+        _id: data.user._id || data.user.id // Asegura que _id siempre tenga valor
+      };
+      setUser(userData);
+      setIsAuthenticated(true);
+      return data;
+    } else {
+      throw new Error(data.message || 'Error en el login');
     }
-  };
+  } catch (error) {
+    throw error;
+  }
+};
 
   // Función para logout
   const logout = () => {
