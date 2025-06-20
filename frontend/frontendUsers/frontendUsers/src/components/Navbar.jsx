@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDown, Search, ShoppingBag, Globe, Menu, X } from 'lucide-react';
+import { ChevronDown, Search, ShoppingBag, Globe, Menu, X, User, LogOut } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/authenticacionContext';
 import './Navbar.css';
 import elcorteLogo from '../assets/elCorte.png';
 
@@ -8,7 +9,12 @@ const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  
+  const { user, isAuthenticated, logout, loading } = useAuth();
+  
   const searchRef = useRef(null);
+  const userMenuRef = useRef(null);
   const dropdownRefs = {
     tienda: useRef(null),
     mas: useRef(null)
@@ -19,6 +25,11 @@ const Navbar = () => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setShowSearch(false);
       }
+      
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setShowUserMenu(false);
+      }
+      
       Object.entries(dropdownRefs).forEach(([key, ref]) => {
         if (ref.current && !ref.current.contains(event.target)) {
           setActiveDropdown((prev) => (prev === key ? null : prev));
@@ -38,6 +49,13 @@ const Navbar = () => {
   const toggleDropdown = (dropdownName) => {
     setActiveDropdown((prev) => (prev === dropdownName ? null : dropdownName));
     setShowSearch(false);
+    setShowUserMenu(false);
+  };
+
+  const toggleUserMenu = () => {
+    setShowUserMenu((prev) => !prev);
+    setShowSearch(false);
+    setActiveDropdown(null);
   };
 
   const handleMouseEnter = (dropdownName) => {
@@ -60,12 +78,58 @@ const Navbar = () => {
     setMobileMenuOpen((prev) => !prev);
     setShowSearch(false);
     setActiveDropdown(null);
+    setShowUserMenu(false);
   };
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
     setActiveDropdown(null);
+    setShowUserMenu(false);
   };
+
+  const handleLogout = () => {
+    logout();
+    setShowUserMenu(false);
+    closeMobileMenu();
+  };
+
+  // Componente para el menú de usuario
+  const UserMenu = () => (
+    <div className={`user-dropdown-menu ${showUserMenu ? 'show' : ''}`}>
+      <div className="user-info">
+        <div className="user-avatar">
+          <User size={20} />
+        </div>
+        <div className="user-details">
+          <span className="user-name">{user?.name}</span>
+          <span className="user-email">{user?.email}</span>
+          <span className="user-role">{user?.userType === 'employee' ? 'Empleado' : 'Cliente'}</span>
+        </div>
+      </div>
+      <div className="user-menu-divider"></div>
+      <Link to="/profile" className="user-menu-item" onClick={() => setShowUserMenu(false)}>
+        <User size={16} />
+        Mi Perfil
+      </Link>
+      {user?.userType === 'client' && (
+        <Link to="/orders" className="user-menu-item" onClick={() => setShowUserMenu(false)}>
+          <ShoppingBag size={16} />
+          Mis Pedidos
+        </Link>
+      )}
+      {user?.userType === 'employee' && (
+        <Link to="/admin" className="user-menu-item" onClick={() => setShowUserMenu(false)}>
+          <User size={16} />
+          Panel Admin
+        </Link>
+      )}
+      <div className="user-menu-divider"></div>
+      <button className="user-menu-item logout-item" onClick={handleLogout}>
+        <LogOut size={16} />
+        Cerrar Sesión
+      </button>
+    </div>
+  );
 
   return (
     <nav className="navbar">
@@ -132,7 +196,30 @@ const Navbar = () => {
 
           {/* Acciones extra en móvil */}
           <div className="mobile-menu-actions">
-            <Link to="/login" className="mobile-navbar-login" onClick={closeMobileMenu}>Iniciar Sesión</Link>
+            {!loading && (
+              isAuthenticated ? (
+                <div className="mobile-user-section">
+                  <div className="mobile-user-info">
+                    <User size={20} />
+                    <span>{user?.name}</span>
+                  </div>
+                  <Link to="/profile" className="mobile-menu-link" onClick={closeMobileMenu}>Mi Perfil</Link>
+                  {user?.userType === 'client' && (
+                    <Link to="/orders" className="mobile-menu-link" onClick={closeMobileMenu}>Mis Pedidos</Link>
+                  )}
+                  {user?.userType === 'employee' && (
+                    <Link to="/admin" className="mobile-menu-link" onClick={closeMobileMenu}>Panel Admin</Link>
+                  )}
+                  <button className="mobile-logout-button" onClick={handleLogout}>
+                    <LogOut size={16} />
+                    Cerrar Sesión
+                  </button>
+                </div>
+              ) : (
+                <Link to="/login" className="mobile-navbar-login" onClick={closeMobileMenu}>Iniciar Sesión</Link>
+              )
+            )}
+            
             <div className="mobile-search-container">
               <input type="text" placeholder="Buscar..." className="mobile-search-input" />
               <Search size={20} className="mobile-search-icon" />
@@ -157,6 +244,7 @@ const Navbar = () => {
               onClick={() => {
                 setShowSearch(!showSearch);
                 setActiveDropdown(null);
+                setShowUserMenu(false);
               }}
             >
               <Search size={20} />
@@ -165,7 +253,23 @@ const Navbar = () => {
               <input type="text" placeholder="Buscar..." className="search-input" autoFocus />
             )}
           </div>
-          <Link to="/login" className="navbar-login">Iniciar Sesión</Link>
+          
+          {/* Botón de usuario/login */}
+          {!loading && (
+            isAuthenticated ? (
+              <div className="user-menu-container" ref={userMenuRef}>
+                <button className="navbar-user-button" onClick={toggleUserMenu}>
+                  <User size={18} />
+                  <span className="user-name-display">{user?.name}</span>
+                  <ChevronDown size={16} className={`user-dropdown-icon ${showUserMenu ? 'rotate' : ''}`} />
+                </button>
+                <UserMenu />
+              </div>
+            ) : (
+              <Link to="/login" className="navbar-login">Iniciar Sesión</Link>
+            )
+          )}
+          
           <Link to="/cart" className="navbar-cart">
             <ShoppingBag size={20} />
             <span className="cart-badge">8</span>

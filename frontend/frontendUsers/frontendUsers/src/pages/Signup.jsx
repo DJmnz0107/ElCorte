@@ -1,47 +1,75 @@
-// Importación de React
-import React from 'react';
-// Importación del archivo CSS correspondiente
+import React, { useState } from 'react';
 import '../css/register.css';
+import useAddCustomer from '../components/hooks/useDataCustomers';
 
-// Componente funcional SignUp (formulario de registro)
 const SignUp = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    dateOfBirth: ''
+  });
+
+  const { addCustomer, loading, error } = useAddCustomer();
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const newCustomer = await addCustomer(formData);
+      alert(`¡Registro exitoso, ${newCustomer.firstName}!`);
+      // Redirigir al login o dashboard
+      window.location.href = '/login';
+    } catch (err) {
+      // El error ya está manejado por el hook
+    }
+  };
+
   return (
     <div className="signup-container">
-      
-      {/* Sección principal del formulario de registro */}
       <div className="signup-form-section">
         <div className="signup-form-wrapper">
-          
-          {/* Título principal con emoji */}
           <h1 className="signup-title">Únete al goce <span className="emoji">🍴</span></h1>
           
-          {/* Formulario de registro */}
-          <form className="signup-form">
+          {error && <div className="error-message">{error}</div>}
 
-            {/* Grupo para nombre y apellido */}
+          <form className="signup-form" onSubmit={handleSubmit}>
             <div className="name-row">
               <div className="form-group">
-                <label htmlFor="name">Nombre</label>
+                <label htmlFor="firstName">Nombre</label>
                 <input
                   type="text"
-                  id="name"
+                  id="firstName"
                   placeholder="Tu nombre"
                   className="form-input"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
                 />
               </div>
               
               <div className="form-group">
-                <label htmlFor="lastname">Apellido</label>
+                <label htmlFor="lastName">Apellido</label>
                 <input
                   type="text"
-                  id="lastname"
+                  id="lastName"
                   placeholder="Tu apellido"
                   className="form-input"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required
                 />
               </div>
             </div>
 
-            {/* Campo de correo electrónico */}
             <div className="form-group">
               <label htmlFor="email">Correo Electrónico</label>
               <input
@@ -49,10 +77,12 @@ const SignUp = () => {
                 id="email"
                 placeholder="usuario@ejemplo.com"
                 className="form-input"
+                value={formData.email}
+                onChange={handleChange}
+                required
               />
             </div>
 
-            {/* Campo de contraseña con botón para mostrarla (funcionalidad no implementada aún) */}
             <div className="form-group">
               <label htmlFor="password">Contraseña</label>
               <div className="password-input">
@@ -61,6 +91,10 @@ const SignUp = () => {
                   id="password"
                   placeholder="••••••••"
                   className="form-input"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  minLength="6"
                 />
                 <button type="button" className="show-password">
                   <svg viewBox="0 0 24 24" width="20" height="20">
@@ -71,27 +105,30 @@ const SignUp = () => {
               </div>
             </div>
 
-            {/* Campo de fecha de nacimiento */}
             <div className="form-group date-group">
-              <label htmlFor="birthdate">Fecha de Nacimiento</label>
+              <label htmlFor="dateOfBirth">Fecha de Nacimiento</label>
               <input
                 type="date"
-                id="birthdate"
+                id="dateOfBirth"
                 className="date-input"
+                value={formData.dateOfBirth}
+                onChange={handleChange}
+                required
               />
             </div>
 
-            {/* Botón de envío del formulario */}
-            <button type="submit" className="submit-button">
-              Registrarse
+            <button 
+              type="submit" 
+              className="submit-button"
+              disabled={loading}
+            >
+              {loading ? 'Registrando...' : 'Registrarse'}
             </button>
 
-            {/* Separador visual */}
             <div className="divider">
               <span>o</span>
             </div>
 
-            {/* Botón para registrarse con Google */}
             <button type="button" className="google-button">
               <img 
                 src="https://www.svgrepo.com/show/475656/google-color.svg" 
@@ -101,7 +138,6 @@ const SignUp = () => {
               Continuar con Google
             </button>
 
-            {/* Enlace para usuarios ya registrados */}
             <p className="existing-account">
               ¿Tienes una cuenta? <a href="/login">Inicia sesión aquí</a>
             </p>
@@ -109,15 +145,13 @@ const SignUp = () => {
         </div>
       </div>
       
-      {/* Sección lateral derecha para posible imagen o contenido promocional */}
       <div className="signup-banner">
         <div className="banner-content">
-          {/* Puedes añadir aquí una imagen, texto o branding */}
+          {/* Contenido promocional */}
         </div>
       </div>
     </div>
   );
 };
 
-// Exporta el componente para su uso en rutas
 export default SignUp;

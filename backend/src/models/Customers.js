@@ -17,7 +17,7 @@ const customersSchema = new Schema (
             require:true
         },
         lastName: {
-            type:Number,
+            type:String,
             require:true
         },
         email: {
@@ -39,5 +39,4 @@ const customersSchema = new Schema (
     }
 
 );
-
 export default model("Customers", customersSchema);
