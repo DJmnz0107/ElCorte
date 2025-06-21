@@ -13,6 +13,10 @@ import customersRoutes from './src/routes/customers.js';
 import paymentsRoutes from './src/routes/paymentMethods.js';
 import loginRoutes from './src/routes/login.js';
 import logoutRoutes from './src/routes/logout.js';
+import logoutRoutes from './src/routes/logout.js';
+import logoutRoutes from './src/routes/logout.js';
+import logoutRoutes from './src/routes/logout.js';
+import logoutRoutes from './src/routes/logout.js';
 import recoveryPasswordRoutes from './src/routes/recoveryPassword.js';
 
 const app = express();
@@ -36,9 +40,6 @@ app.use("/api/customers" , customersRoutes);
 app.use("/api/payments" , paymentsRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/logout", logoutRoutes);
-app.use("/api/recovery", recoveryPasswordRoutes);
-app.use("/api/recovery", recoveryPasswordRoutes);
-app.use("/api/recovery", recoveryPasswordRoutes);
 
 export default app;
 //ESTO ES UNA PRUEBA
