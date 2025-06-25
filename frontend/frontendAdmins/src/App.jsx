@@ -16,6 +16,8 @@ import Suppliers from './pages/Suppliers';
 import Products from './pages/Products';
 import Employees from "./pages/Employees";
 import Customers from "./pages/Customers";
+
+
 import './App.css';
 
 function AppContent() {

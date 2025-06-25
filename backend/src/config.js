@@ -16,6 +16,10 @@ export const config = {
         expires: process.env.JWT_EXPIRES
 
     },
+    emailUser: {
+    user_email: process.env.USER_EMAIL,
+    user_pass: process.env.USER_PASS
+  },
     cloudinary: {
         cloud_name: process.env.CLOUD_NAME,
         cloudinary_api_key: process.env.CLOUDINARY_API_KEY,

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import useRecoveryPassword from '../components/RecoveryPassword/Hooks/useRecoveryPassword';
 import '../css/verifycode.css';
 
 const VerificarCodigo = () => {
   const [codigo, setCodigo] = useState('');
   const [error, setError] = useState('');
+  const { verifyRecoveryCode, loading } = useRecoveryPassword();
   const navigate = useNavigate();
 
-  const codigoValido = '123456'; // Código de ejemplo para validar
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (codigo.trim() === '') {
@@ -18,12 +17,12 @@ const VerificarCodigo = () => {
       return;
     }
 
-    if (codigo === codigoValido) {
-      setError('');
-      // Redirigir a la página de recuperación de contraseña
-      navigate('/recuperar-contraseña');
+    const isValid = await verifyRecoveryCode(codigo);
+    if (isValid) {
+      navigate('/change-password');
+
     } else {
-      setError('Código incorrecto. Intenta nuevamente.');
+      setError('Código incorrecto o expirado.');
     }
   };
 
@@ -31,9 +30,7 @@ const VerificarCodigo = () => {
     <div className="login-container">
       <div className="login-form-section">
         <div className="login-form">
-          <h1 className="verification-title">
-            Ingresa tu código de recuperación
-          </h1>
+          <h1 className="verification-title">Ingresa tu código de recuperación</h1>
 
           <form className="form" onSubmit={handleSubmit}>
             <div className="form-group">
@@ -41,28 +38,29 @@ const VerificarCodigo = () => {
                 type="text"
                 id="verification-code"
                 className="form-input verification-input"
-                placeholder="Código de 6 dígitos"
+                placeholder="Código de 5 dígitos"
                 value={codigo}
                 onChange={(e) => setCodigo(e.target.value)}
+                disabled={loading}
               />
             </div>
 
-            {error && <p style={{color: 'red', fontSize: '14px', marginTop: '-15px', marginBottom: '10px'}}>{error}</p>}
+            {error && <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
 
-            <Link to="/ChangePassword" className="verify-link">
-            <button type="submit" className="submit-button verification-button">
-              Verificar
+            <button
+              type="submit"
+              className="submit-button verification-button"
+              disabled={loading}
+            >
+              {loading ? 'Verificando...' : 'Verificar'}
             </button>
-            </Link>
           </form>
         </div>
       </div>
 
       <div className="login-banner-section">
         <div className="login-banner">
-          <div className="banner-content">
-            {/* Contenido del banner si es necesario */}
-          </div>
+          <div className="banner-content">{/* Banner opcional */}</div>
         </div>
       </div>
     </div>

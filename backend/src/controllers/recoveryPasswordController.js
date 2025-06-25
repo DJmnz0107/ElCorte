@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import clientModel from "../models/Customers.js";
 import employeeModel from "../models/Employees.js";
-import { sendEmail, HTMLRecoveryEmail } from "../utils/mailRecoveryPassword.js";
+import { sendEmail, HTMLRecoveryEmail } from "../../utils/mailRecoveryPassword.js"
 import { config } from "../config.js";
 
 const recoveryPasswordController = {};
@@ -61,11 +61,14 @@ recoveryPasswordController.verifyCode = async (req, res) => {
       return res.status(401).json({ message: "Código incorrecto" });
     }
 
-    const newToken = jwt.sign(
-      { ...decoded, verified: true },
-      config.JWT.secret,
-      { expiresIn: "20m" }
-    );
+    const { exp, iat, ...rest } = decoded;
+
+const newToken = jwt.sign(
+  { ...rest, verified: true },
+  config.JWT.secret,
+  { expiresIn: "20m" }
+);
+
 
     res.cookie("tokenRecoveryCode", newToken, {
       httpOnly: true,
