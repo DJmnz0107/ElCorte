@@ -18,6 +18,7 @@ import AboutUs from './pages/AboutUs';
 import TermsAndConditions from './pages/TermsAndConditions';
 import Home from './pages/Home';
 import News from './pages/NewsPage';
+import Orders from './pages/Orders'; // Asegúrate de que esta ruta sea correcta
 import ContactUs from './pages/ContactUs';
 import Cart from './pages/Cart';
 
@@ -107,6 +108,15 @@ function App() {
             <>
               <Navbar />
               <TermsAndConditions />
+              <Footer />
+            </>
+          } />
+
+          {/* Ruta Historial*/}
+          <Route path="/orders" element={
+            <>
+              <Navbar />
+              <Orders />
               <Footer />
             </>
           } />

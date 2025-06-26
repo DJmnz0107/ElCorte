@@ -143,3 +143,30 @@
     flex: 0 0 230px;
   }
 }
+
+.already-in-order {
+  background: #e8f5e8;
+  color: #2d5a2d;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-left: 10px;
+  font-size: 0.9em;
+}
+
+.order-info {
+  margin-top: 10px;
+  color: #666;
+}
+
+.error-message {
+  color: #d32f2f;
+  margin-top: 8px;
+  font-size: 14px;
+}

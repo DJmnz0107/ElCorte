@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PromoHeader from '../components/PromoHeader';
 import ProductCard from '../components/ProductCard';
@@ -10,6 +10,21 @@ const Store = () => {
   const navigate = useNavigate();
   
   const { products, categories } = useFetchProducts();
+
+  // Debug - ver qué está pasando
+  console.log('Store render - Products:', products?.length || 0);
+
+  // Si no hay productos, mostrar loading
+  if (!products || products.length === 0) {
+    return (
+      <div className="store-page">
+        <PromoHeader />
+        <div className="store-container">
+          <div>Cargando productos...</div>
+        </div>
+      </div>
+    );
+  }
 
   // Procesamos los productos para añadir campos útiles
   const processedProducts = products.map(product => ({
@@ -39,6 +54,7 @@ const Store = () => {
       : processedProducts.filter(product => product.categoryName === activeCategory);
 
   const handleProductClick = (product) => {
+    console.log('Navegando a producto:', product);
     navigate('/product-detail', { state: { product } });
   };
 

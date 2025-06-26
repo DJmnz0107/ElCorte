@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Función para verificar token
+  // Función para verificar token mejorada
   const verifyToken = async () => {
     try {
       const token = localStorage.getItem('authToken');
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
         return;
       }
 
-      const response = await fetch('/api/auth/verify-token', {
+      const response = await fetch('http://localhost:4000/api/login/verify-token', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -35,63 +35,75 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        if (data.success) {
-          setUser(data.user);
+        if (data.success && data.user) {
+          // Normaliza los campos de ID
+          const userData = {
+            ...data.user,
+            _id: data.user._id || data.user.id
+          };
+          setUser(userData);
           setIsAuthenticated(true);
         } else {
-          // Token inválido
-          localStorage.removeItem('authToken');
-          setUser(null);
-          setIsAuthenticated(false);
+          // Token inválido o datos incompletos
+          handleAuthError();
         }
       } else {
-        // Error en la respuesta
-        localStorage.removeItem('authToken');
-        setUser(null);
-        setIsAuthenticated(false);
+        // Error en la respuesta (401, 403, etc.)
+        handleAuthError();
       }
     } catch (error) {
       console.error('Error verificando token:', error);
-      localStorage.removeItem('authToken');
-      setUser(null);
-      setIsAuthenticated(false);
+      handleAuthError();
     } finally {
       setLoading(false);
     }
   };
 
-  // Función para login
-  // En tu función login del AuthContext
-// En tu función login del AuthContext:
-const login = async (email, password) => {
-  try {
-    const response = await fetch('http://localhost:4000/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+  // Función helper para manejar errores de autenticación
+  const handleAuthError = () => {
+    localStorage.removeItem('authToken');
+    setUser(null);
+    setIsAuthenticated(false);
+  };
 
-    const data = await response.json();
+  // Función para login mejorada
+  const login = async (email, password) => {
+    try {
+      setLoading(true);
+      
+      const response = await fetch('http://localhost:4000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (data.success) {
-      localStorage.setItem('authToken', data.token);
-      // Normaliza los campos de ID
-      const userData = {
-        ...data.user,
-        _id: data.user._id || data.user.id // Asegura que _id siempre tenga valor
-      };
-      setUser(userData);
-      setIsAuthenticated(true);
-      return data;
-    } else {
-      throw new Error(data.message || 'Error en el login');
+      const data = await response.json();
+
+      if (data.success && data.token && data.user) {
+        // Guarda el token en localStorage
+        localStorage.setItem('authToken', data.token);
+        
+        // Normaliza los campos de ID
+        const userData = {
+          ...data.user,
+          _id: data.user._id || data.user.id
+        };
+        
+        setUser(userData);
+        setIsAuthenticated(true);
+        return data;
+      } else {
+        throw new Error(data.message || 'Error en el login');
+      }
+    } catch (error) {
+      console.error('Error en login:', error);
+      throw error;
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    throw error;
-  }
-};
+  };
 
   // Función para logout
   const logout = () => {
@@ -100,10 +112,38 @@ const login = async (email, password) => {
     setIsAuthenticated(false);
   };
 
+  // Función para actualizar datos del usuario
+  const updateUser = (userData) => {
+    const normalizedUser = {
+      ...userData,
+      _id: userData._id || userData.id
+    };
+    setUser(normalizedUser);
+  };
+
   // Verificar token al cargar la aplicación
   useEffect(() => {
     verifyToken();
   }, []);
+
+  // Listener para detectar cambios en localStorage (útil para múltiples pestañas)
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'authToken') {
+        if (e.newValue === null) {
+          // Token removido en otra pestaña
+          setUser(null);
+          setIsAuthenticated(false);
+        } else if (e.newValue && !isAuthenticated) {
+          // Token añadido en otra pestaña
+          verifyToken();
+        }
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [isAuthenticated]);
 
   const value = {
     user,
@@ -111,7 +151,8 @@ const login = async (email, password) => {
     loading,
     login,
     logout,
-    verifyToken
+    verifyToken,
+    updateUser
   };
 
   return (

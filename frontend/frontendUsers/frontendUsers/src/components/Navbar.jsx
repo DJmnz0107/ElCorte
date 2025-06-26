@@ -107,10 +107,6 @@ const Navbar = () => {
         </div>
       </div>
       <div className="user-menu-divider"></div>
-      <Link to="/profile" className="user-menu-item" onClick={() => setShowUserMenu(false)}>
-        <User size={16} />
-        Mi Perfil
-      </Link>
       {user?.userType === 'client' && (
         <Link to="/orders" className="user-menu-item" onClick={() => setShowUserMenu(false)}>
           <ShoppingBag size={16} />
@@ -168,11 +164,9 @@ const Navbar = () => {
               <div className={`dropdown-menu ${activeDropdown === 'tienda' ? 'show' : ''}`}>
                 <Link to="/tienda" className="dropdown-item" onClick={closeMobileMenu}>Productos</Link>
                 <Link to="/TermsAndConditions" className="dropdown-item" onClick={closeMobileMenu}>Términos y Condiciones</Link>
-                <Link to="/envios" className="dropdown-item" onClick={closeMobileMenu}>Envíos y Devoluciones</Link>
               </div>
             </div>
 
-            <Link to="/News" className="navbar-item" onClick={closeMobileMenu}>Noticias</Link>
 
             {/* Dropdown Más */}
             <div
@@ -186,8 +180,6 @@ const Navbar = () => {
               </button>
               <div className={`dropdown-menu ${activeDropdown === 'mas' ? 'show' : ''}`}>
                 <Link to="/ContactUs" className="dropdown-item" onClick={closeMobileMenu}>Contacto</Link>
-                <Link to="/preguntas" className="dropdown-item" onClick={closeMobileMenu}>Preguntas Frecuentes</Link>
-                <Link to="/blog" className="dropdown-item" onClick={closeMobileMenu}>Blog</Link>
               </div>
             </div>
 
@@ -203,7 +195,6 @@ const Navbar = () => {
                     <User size={20} />
                     <span>{user?.name}</span>
                   </div>
-                  <Link to="/profile" className="mobile-menu-link" onClick={closeMobileMenu}>Mi Perfil</Link>
                   {user?.userType === 'client' && (
                     <Link to="/orders" className="mobile-menu-link" onClick={closeMobileMenu}>Mis Pedidos</Link>
                   )}
@@ -220,38 +211,17 @@ const Navbar = () => {
               )
             )}
             
-            <div className="mobile-search-container">
-              <input type="text" placeholder="Buscar..." className="mobile-search-input" />
-              <Search size={20} className="mobile-search-icon" />
-            </div>
             <Link to="/cart" className="mobile-cart-link" onClick={closeMobileMenu}>
               <ShoppingBag size={20} />
               <span className="cart-badge">8</span>
               <span className="mobile-cart-text">Mi Carrito</span>
             </Link>
-            <div className="mobile-language-selector">
-              <Globe size={20} className="mobile-globe-icon" />
-              <span>Seleccionar idioma</span>
-            </div>
           </div>
         </div>
 
         {/* Acciones de usuario (desktop) */}
         <div className="navbar-section navbar-actions-section">
           <div className={`navbar-search ${showSearch ? 'expanded' : ''}`} ref={searchRef}>
-            <button
-              className="search-button"
-              onClick={() => {
-                setShowSearch(!showSearch);
-                setActiveDropdown(null);
-                setShowUserMenu(false);
-              }}
-            >
-              <Search size={20} />
-            </button>
-            {showSearch && (
-              <input type="text" placeholder="Buscar..." className="search-input" autoFocus />
-            )}
           </div>
           
           {/* Botón de usuario/login */}
@@ -274,9 +244,6 @@ const Navbar = () => {
             <ShoppingBag size={20} />
             <span className="cart-badge">8</span>
           </Link>
-          <button className="navbar-language-button">
-            <Globe size={20} />
-          </button>
         </div>
       </div>
 
