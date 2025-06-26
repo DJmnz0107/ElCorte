@@ -17,7 +17,11 @@ import ConfirmPayment from './pages/ConfirmPayment';
 import AboutUs from './pages/AboutUs';
 import TermsAndConditions from './pages/TermsAndConditions';
 import Home from './pages/Home';
+import { Toaster } from 'react-hot-toast';
 import News from './pages/NewsPage';
+import RecoveryPassword from './pages/RecoveryPassword';
+import VerifyCode from './pages/VerifyCode';
+import ChangePassword from './pages/ChangePassword';
 import Orders from './pages/Orders'; // Asegúrate de que esta ruta sea correcta
 import ContactUs from './pages/ContactUs';
 import Cart from './pages/Cart';
@@ -33,6 +37,7 @@ function App() {
   return (
     // Envolvemos la app con el Router para habilitar rutas
     <Router>
+            <Toaster position="top-right" reverseOrder={false} />
       {/* Envolvemos con AuthProvider para proporcionar contexto de autenticación */}
       <AuthProvider>
         <Routes>
@@ -46,6 +51,27 @@ function App() {
               <Navbar />
               <Home />
               <Footer />
+            </>
+          } />
+
+           {/* Ruta de inicio (con Navbar y Footer) */}
+          <Route path="/forgot-password" element={
+            <>
+              <RecoveryPassword />
+            </>
+          } />
+
+           {/* Ruta de inicio (con Navbar y Footer) */}
+          <Route path="/verify-code" element={
+            <>
+              <VerifyCode />
+            </>
+          } />
+
+           {/* Ruta de inicio (con Navbar y Footer) */}
+          <Route path="/change-password" element={
+            <>
+              <ChangePassword />
             </>
           } />
 
