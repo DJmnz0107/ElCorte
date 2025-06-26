@@ -112,8 +112,7 @@ const Login = () => {
 
             <div className="form-options">
               <div className="remember-me">
-                <input type="checkbox" id="remember" />
-                <label htmlFor="remember">Recordar sesión</label>
+                
               </div>
               <Link to="/forgot-password" className="forgot-password">
                 ¿Olvidaste tu contraseña?
@@ -127,11 +126,11 @@ const Login = () => {
             {errorLogin && <p style={{ color: 'red' }}>{errorLogin}</p>}
 
             <div className="divider">
-              <span>o continuar con</span>
+             
             </div>
 
             <div className="register-link">
-              ¿No tienes una cuenta? <Link to="/signup">Regístrate aquí</Link>
+             
             </div>
           </form>
         </div>

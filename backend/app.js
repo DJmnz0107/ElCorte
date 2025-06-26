@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors'; 
+import cookieParser from 'cookie-parser'; // ✅
 
 import ordersRoutes from "./src/routes/orders.js";
 import productRoutes from "./src/routes/products.js";
@@ -12,6 +13,7 @@ import customersRoutes from './src/routes/customers.js';
 import paymentsRoutes from './src/routes/paymentMethods.js';
 import loginRoutes from './src/routes/login.js';
 import logoutRoutes from './src/routes/logout.js';
+import recoveryPasswordRoutes from './src/routes/recoveryPassword.js';
 
 const app = express();
 
@@ -21,6 +23,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(cookieParser()); // ✅ Middleware necesario para acceder a req.cookies
 
 app.use("/api/products", productRoutes);
 app.use("/api/orders", ordersRoutes );
@@ -33,6 +36,6 @@ app.use("/api/customers" , customersRoutes);
 app.use("/api/payments" , paymentsRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/logout", logoutRoutes);
+app.use("/api/recovery", recoveryPasswordRoutes);
 
 export default app;
-  

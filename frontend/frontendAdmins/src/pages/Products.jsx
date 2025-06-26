@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { MdAdd, MdSearch } from 'react-icons/md';
+import { MdAdd, MdSearch, MdCategory } from 'react-icons/md';
 import ProductCard from '../components/Products/Components/ProductCard';
 import ProductModal from '../components/Products/Components/ProductModal';
 import ConfirmationModal from '../components/Products/Components/ConfirmationModal';
+import CategoryModal from '../components/Categories/Components/CategoryModal';
 import '../css/products.css';
 import useDataProductsInterface from '../components/Products/hooks/useDataProductsInterface';
+import useDataCategoriesInterface from '../components/Categories/hooks/useDataCategoriesInterface';
 
 const Productos = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,6 +18,11 @@ const Productos = () => {
   const [productToDeleteId, setProductToDeleteId] = useState(null);
   const [productToDeleteName, setProductToDeleteName] = useState('');
 
+  // Estados para el modal de categorías
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [categoryModalMode, setCategoryModalMode] = useState('add');
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
   const {
     products,
     loading,
@@ -24,6 +31,16 @@ const Productos = () => {
     handleDeleteProductBackend,
     getProductId,
   } = useDataProductsInterface();
+
+  // Hook para categorías
+  const {
+    categories,
+    loading: categoriesLoading,
+    handleAddCategoryBackend,
+    handleUpdateCategoryBackend,
+    handleDeleteCategoryBackend,
+    getCategoryId,
+  } = useDataCategoriesInterface();
 
   // ✅ SOLUCIÓN: Filtrado mejorado con debugging
   useEffect(() => {
@@ -58,6 +75,15 @@ const Productos = () => {
     setModalMode('add');
     setSelectedProduct(null);
     setIsModalOpen(true);
+  };
+
+  const handleAddCategory = () => {
+    console.log('handleAddCategory called');
+    console.log('Current isCategoryModalOpen state:', isCategoryModalOpen);
+    setCategoryModalMode('add');
+    setSelectedCategory(null);
+    setIsCategoryModalOpen(true);
+    console.log('Modal state should be set to true');
   };
 
   const handleEditProduct = (product) => {
@@ -143,6 +169,46 @@ const Productos = () => {
     setSearchTerm(e.target.value);
   };
 
+  // Funciones para manejar el modal de categorías
+  const handleSaveCategory = async (categoryData) => {
+    try {
+      console.log('Saving category:', { mode: categoryModalMode, data: categoryData });
+      
+      if (categoryModalMode === 'add') {
+        console.log('Adding new category...');
+        await handleAddCategoryBackend(categoryData);
+      } else {
+        console.log('Updating existing category...');
+        await handleUpdateCategoryBackend({
+          ...categoryData,
+          _id: getCategoryId(selectedCategory)
+        });
+      }
+      
+      setIsCategoryModalOpen(false);
+      setSelectedCategory(null);
+      console.log('Category saved successfully');
+
+      <CategoryModal
+  isOpen={isCategoryModalOpen}
+  onClose={handleCloseCategoryModal}
+  onSave={handleSaveCategory}
+  category={selectedCategory}
+  mode={modalCategoryMode}
+/>
+      
+    } catch (error) {
+      console.error('Error in handleSaveCategory:', error);
+      throw error; // Re-lanzar para que el modal pueda manejarlo
+    }
+  };
+
+  const handleCloseCategoryModal = () => {
+    setIsCategoryModalOpen(false);
+    setSelectedCategory(null);
+    setCategoryModalMode('add');
+  };
+
   // ✅ SOLUCIÓN: Mostrar estado de carga específico
   if (loading && (!products || products.length === 0)) {
     return (
@@ -171,6 +237,15 @@ const Productos = () => {
               className="search-input"
             />
           </div>
+
+          <button
+            className="btn btn-secondary"
+            onClick={handleAddCategory}
+            disabled={loading || categoriesLoading}
+          >
+            <MdCategory className="btn-icon" />
+            Agregar categorías
+          </button>
 
           <button
             className="btn btn-add"
@@ -237,6 +312,16 @@ const Productos = () => {
         confirmText="Eliminar"
         cancelText="Cancelar"
       />
+
+      <CategoryModal
+        isOpen={isCategoryModalOpen}
+        onClose={handleCloseCategoryModal}
+        onSave={handleSaveCategory}
+        category={selectedCategory}
+        mode={categoryModalMode}
+      />
+
+     
     </div>
   );
 };

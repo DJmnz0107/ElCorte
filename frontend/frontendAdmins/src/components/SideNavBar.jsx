@@ -59,6 +59,7 @@ const Sidebar = () => {
       path: '/productos',
       roles: ['Admin', 'Employee'] // Ambos pueden ver
     }
+    
   ];
 
   // Filtrar elementos del menú según el rol del usuario

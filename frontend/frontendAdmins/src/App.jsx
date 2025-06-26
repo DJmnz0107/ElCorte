@@ -15,6 +15,9 @@ import Sidebar from './components/SideNavBar';
 import Suppliers from './pages/Suppliers';
 import Products from './pages/Products';
 import Employees from "./pages/Employees";
+import Customers from "./pages/Customers";
+
+
 import './App.css';
 
 function AppContent() {
@@ -99,6 +102,15 @@ function AppContent() {
             <Products />
           </ProtectedRoute>
         } />
+
+         {/* Rutas protegidas (requieren autenticación) */}
+        <Route path="/clientes" element={
+          <ProtectedRoute>
+            <Sidebar />
+            <Customers />
+          </ProtectedRoute>
+        } />
+
 
         {/* Ruta solo para Admin */}
         <Route path="/empleados" element={
