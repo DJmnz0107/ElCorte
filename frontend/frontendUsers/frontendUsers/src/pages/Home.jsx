@@ -139,6 +139,7 @@ export default function Home() {
             <img src="/src/assets/tomahawk.jpeg" alt="Tomahawk" />
             <div>
               <p className="title">Tomahawk</p>
+              <p className="title">Tomahawk</p>
               <p className="price">$23.00</p>
             </div>
           </div>
