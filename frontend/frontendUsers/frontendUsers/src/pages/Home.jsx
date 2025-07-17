@@ -128,6 +128,10 @@ export default function Home() {
             <div>
               <p className="title">Cowboy Steak</p>
               <p className="price">$18.00</p>
+              <p className="price">$18.00</p>
+              <p className="price">$18.00</p>
+              <p className="price">$18.00</p>
+              <p className="price">$18.00</p>
             </div>
           </div>
 
